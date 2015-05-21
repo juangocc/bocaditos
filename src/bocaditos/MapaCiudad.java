@@ -123,7 +123,9 @@ public class MapaCiudad {
             for (int j = 0; j < matrizVias[i].length; j++) {
                 Via via = matrizVias[i][j];
                 if (via != null) {
-                    listaVias.add(via);
+                    if (!listaVias.contains(via)) {
+                        listaVias.add(via);
+                    }
                 }
             }
         }
@@ -136,6 +138,11 @@ public class MapaCiudad {
                 Via via = matrizVias[i][j];
                 if (via != null) {
                     if (via.getNombre().equals(nombreVia)) {
+                        if (sentido.equals("Simple")) {
+                            matrizVias[j][i] = null;
+                        } else if (sentido.equals("Doble")) {
+                            matrizVias[j][i] = via;
+                        }
                         via.setSentido(sentido);
                         return true;
                     }
@@ -293,8 +300,8 @@ public class MapaCiudad {
                 Via via = matrizVias[i][j];
                 if (via != null) {
                     if (via.getNombre().equals(nombreVia)) {
-                        matrizVias[i][j]=null;
-                        matrizVias[j][i]=null;
+                        matrizVias[i][j] = null;
+                        matrizVias[j][i] = null;
                         return true;
                     }
                 }
