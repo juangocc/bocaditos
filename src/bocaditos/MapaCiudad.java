@@ -17,7 +17,6 @@ public class MapaCiudad {
 
     LinkedList<Interseccion> listaIntersecciones;
     Via[][] matrizVias;
-    int numVias;
     Grafo grafo;
 
     public MapaCiudad() {
@@ -53,8 +52,7 @@ public class MapaCiudad {
         }
 
         if (interseccionInicial != -1 && interseccionFinal != -1) {
-            numVias++;
-            matrizVias[interseccionInicial][interseccionFinal] = new Via("V" + numVias, direccion, peso);
+            matrizVias[interseccionInicial][interseccionFinal] = new Via("V" + (getVias().size() + 1), direccion, peso);
         }
     }
 
@@ -162,9 +160,9 @@ public class MapaCiudad {
                         if (via.getSentido().equals("Simple")) {
                             matrizVias[i][j] = null;
                             matrizVias[j][i] = via;
-                        }else if (via.getSentido().equals("Doble")) {
+                        } else if (via.getSentido().equals("Doble")) {
                             matrizVias[j][i] = via;
-                        }                        
+                        }
                         return true;
                     }
                 }
@@ -323,11 +321,43 @@ public class MapaCiudad {
                 if (via != null) {
                     int peso = via.getPeso();
                     System.out.print(" " + peso);
-                }else{
+                } else {
                     System.out.print(" 0");
                 }
             }
             System.out.println("");
         }
+    }
+
+    public void eliminarInterseccion(String nombreInterseccionInicial) {
+        int indiceInters = -1;
+        for (int i = 0; i < listaIntersecciones.size(); i++) {
+            Interseccion inters = listaIntersecciones.get(i);
+            if (inters.getNombre().equals(nombreInterseccionInicial)) {
+                indiceInters = i;
+                break;
+            }
+        }
+        listaIntersecciones.remove(indiceInters);
+        // Elimina Columna con el vertice a eliminar
+        for (int i = 0; i < matrizVias.length - 1; i++) {
+            for (int j = indiceInters; j < matrizVias[i].length - 1; j++) {
+                matrizVias[i][j] = matrizVias[i][j + 1];
+            }
+        }
+        // Elimina fila con el vertice a eliminar
+        for (int i = indiceInters; i < matrizVias.length - 1; i++) {
+            for (int j = 0; j < matrizVias[i].length - 1; j++) {
+                matrizVias[i][j] = matrizVias[i + 1][j];
+            }
+        }
+        // Crear una nueva matriz reducida
+        Via[][] matrizViasAux = new Via[listaIntersecciones.size()][listaIntersecciones.size()];
+        for (int i = 0; i < matrizVias.length - 1; i++) {
+            for (int j = 0; j < matrizVias[i].length - 1; j++) {
+                matrizViasAux[i][j] = matrizVias[i][j];
+            }
+        }
+        matrizVias = matrizViasAux;
     }
 }

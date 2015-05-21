@@ -198,6 +198,11 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
         });
 
         jTBElimInters.setText("Eliminar Inters.");
+        jTBElimInters.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTBElimIntersActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
 
@@ -486,6 +491,19 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jBElimViaActionPerformed
+
+    private void jTBElimIntersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTBElimIntersActionPerformed
+        Object objIntersInicial = jCBInterseccionInicial.getSelectedItem();
+        if (objIntersInicial != null) {
+            String nombreInterseccionInicial = objIntersInicial.toString();
+            mapaCiudad.eliminarInterseccion(nombreInterseccionInicial);
+            llenarComboBoxVias();
+            llenarComboBoxCasas();
+            llenarComboBoxIntersecciones();
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay ninguna Intersección seleccionada");
+        }
+    }//GEN-LAST:event_jTBElimIntersActionPerformed
     public void llenarComboBoxIntersecciones() {
         LinkedList<Interseccion> listaIntersecciones = mapaCiudad.listaIntersecciones;
         jCBInterseccionInicial.removeAllItems();

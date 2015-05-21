@@ -27,56 +27,60 @@ public class AreaDeDibujo extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics grphcs) {
         super.paintComponent(grphcs); //To change body of generated methods, choose Tools | Templates.
-        if (getMapaCiudad() != null) {
-            Graphics2D g2 = (Graphics2D) grphcs;
-            LinkedList<Interseccion> listaIntersecciones = getMapaCiudad().listaIntersecciones;
-            Via[][] matrizVias = getMapaCiudad().matrizVias;
-            for (int i = 0; i < matrizVias.length; i++) {
-                Interseccion interseccionInicial = listaIntersecciones.get(i);
-                g2.drawString(interseccionInicial.getNombre(), interseccionInicial.getPosX() - 5, interseccionInicial.getPosY() - 5);
-                g2.draw(interseccionInicial.getArea());
-                for (int j = 0; j < matrizVias[i].length; j++) {
-                    Via via = matrizVias[i][j];
-                    if (via != null) {
-                        Interseccion interseccionFinal = listaIntersecciones.get(j);
-                        int posX1 = interseccionInicial.getPosX();
-                        int posY1 = interseccionInicial.getPosY();
-                        int posX2 = interseccionFinal.getPosX();
-                        int posY2 = interseccionFinal.getPosY();
+        try {
+            if (getMapaCiudad() != null) {
+                Graphics2D g2 = (Graphics2D) grphcs;
+                LinkedList<Interseccion> listaIntersecciones = getMapaCiudad().listaIntersecciones;
+                Via[][] matrizVias = getMapaCiudad().matrizVias;
+                for (int i = 0; i < matrizVias.length; i++) {
+                    Interseccion interseccionInicial = listaIntersecciones.get(i);
+                    g2.drawString(interseccionInicial.getNombre(), interseccionInicial.getPosX() - 5, interseccionInicial.getPosY() - 5);
+                    g2.draw(interseccionInicial.getArea());
+                    for (int j = 0; j < matrizVias[i].length; j++) {
+                        Via via = matrizVias[i][j];
+                        if (via != null) {
+                            Interseccion interseccionFinal = listaIntersecciones.get(j);
+                            int posX1 = interseccionInicial.getPosX();
+                            int posY1 = interseccionInicial.getPosY();
+                            int posX2 = interseccionFinal.getPosX();
+                            int posY2 = interseccionFinal.getPosY();
 
-                        int centX = ((posX1 + posX2) / 2);
-                        int centY = ((posY1 + posY2) / 2);
-                        g2.drawString(via.getNombre()+"-"+via.getPeso(), centX, centY);
-                        
-                        g2.drawLine(posX1, posY1, posX2, posY2);
-                        if (via.getSentido().equals("Simple")) {
-                            dibujarFlecha(posX1, posY1, posX2, posY2, g2);
-                        } else if (via.getSentido().equals("Doble")) {
-                            dibujarFlecha(posX1, posY1, posX2, posY2, g2);
-                            dibujarFlecha(posX2, posY2, posX1, posY1, g2);
-                        } else if (via.getSentido().equals("Bloqueada")) {
-                            // dibujar equis
-                            dibujarFlecha(posX1, posY1, centX, centY, g2);
-                            dibujarFlecha(posX2, posY2, centX, centY, g2);
-                        }
-                        LinkedList<Casa> listaCasas = via.getListaCasas();
-                        for (Casa casa : listaCasas) {
-                            g2.drawString(casa.getNombre(), casa.getPosX() - 5, casa.getPosY() - 5);
-                            g2.draw(casa.getArea());
-                        }
-                        LinkedList<PuestoComidaRapida> listaPuestos = via.getListaPuestos();
-                        for (PuestoComidaRapida puesto : listaPuestos) {
-                            g2.drawString(puesto.getNombre(), puesto.getPosX() - 5, puesto.getPosY() - 5);
-                            g2.draw(puesto.getArea());
-                            LinkedList<Camion> listaCamiones = puesto.getListaCamiones();
-                            for (Camion camion : listaCamiones) {
-                                g2.drawString(camion.getNombre(), camion.getPosX() - 5, camion.getPosY() - 5);
-                                g2.draw(camion.getArea());
+                            int centX = ((posX1 + posX2) / 2);
+                            int centY = ((posY1 + posY2) / 2);
+                            g2.drawString(via.getNombre() + "-" + via.getPeso(), centX, centY);
+
+                            g2.drawLine(posX1, posY1, posX2, posY2);
+                            if (via.getSentido().equals("Simple")) {
+                                dibujarFlecha(posX1, posY1, posX2, posY2, g2);
+                            } else if (via.getSentido().equals("Doble")) {
+                                dibujarFlecha(posX1, posY1, posX2, posY2, g2);
+                                dibujarFlecha(posX2, posY2, posX1, posY1, g2);
+                            } else if (via.getSentido().equals("Bloqueada")) {
+                                // dibujar equis
+                                dibujarFlecha(posX1, posY1, centX, centY, g2);
+                                dibujarFlecha(posX2, posY2, centX, centY, g2);
+                            }
+                            LinkedList<Casa> listaCasas = via.getListaCasas();
+                            for (Casa casa : listaCasas) {
+                                g2.drawString(casa.getNombre(), casa.getPosX() - 5, casa.getPosY() - 5);
+                                g2.draw(casa.getArea());
+                            }
+                            LinkedList<PuestoComidaRapida> listaPuestos = via.getListaPuestos();
+                            for (PuestoComidaRapida puesto : listaPuestos) {
+                                g2.drawString(puesto.getNombre(), puesto.getPosX() - 5, puesto.getPosY() - 5);
+                                g2.draw(puesto.getArea());
+                                LinkedList<Camion> listaCamiones = puesto.getListaCamiones();
+                                for (Camion camion : listaCamiones) {
+                                    g2.drawString(camion.getNombre(), camion.getPosX() - 5, camion.getPosY() - 5);
+                                    g2.draw(camion.getArea());
+                                }
                             }
                         }
                     }
                 }
             }
+        } catch (Exception e) {
+            System.out.println(""+e);
         }
     }
 
