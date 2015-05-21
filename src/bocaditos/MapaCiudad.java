@@ -213,15 +213,30 @@ public class MapaCiudad {
         }
         grafo = new Grafo(grafoPesos, listaIntersecciones.size(), numAristas);
         //-----------
-        //System.out.println(G.MostrarMatriz());
-        //System.out.println(G.verMatriz(G.FloyWarshall().get(0)));
-        //System.out.println(G.Dijkstra(1));
-        System.out.println(grafo.recorrido(grafo.Profundidad()));
-        //System.out.println(G.recorrido(G.Anchura()));
-        //System.out.println(G.verMatriz(G.KKruscal()));
-        //System.out.println(G.verMatriz(G.Prim(0).getGrafo()));
-        //-----------temporal
-        rutaOptima = listaIntersecciones;
+        String rutaStr = "";
+        String verMatriz = grafo.MostrarMatriz();
+        String floyMatriz = grafo.verMatriz(grafo.FloyWarshall().get(0));
+        String dijkstra = grafo.Dijkstra(1);
+        String profundidad = grafo.recorrido(grafo.Profundidad());
+        String anchura = grafo.recorrido(grafo.Anchura());
+        String kruskal = grafo.verMatriz(grafo.KKruscal());
+        String prim = grafo.verMatriz(grafo.Prim(0).getGrafo());
+
+        System.out.println("verMatriz : \n" + verMatriz + "\n");
+        System.out.println("floyWarshall : \n" + anchura + "\n");
+        System.out.println("Dijkstra : \n" + anchura + "\n");
+        System.out.println("Produndidad : \n" + anchura + "\n");
+        System.out.println("Anchura : \n" + anchura + "\n");
+        System.out.println("Kruskal : \n" + anchura + "\n");
+        System.out.println("Prim : \n" + anchura + "\n");
+        //-----------------------
+        rutaStr = profundidad;
+        String[] rutaVec = rutaStr.split(" ");
+
+        for (String intStr : rutaVec) {
+            int indiceInters = Integer.parseInt(intStr);
+            rutaOptima.add(listaIntersecciones.get(indiceInters));
+        }
         //-------------
         return rutaOptima;
     }
@@ -265,6 +280,22 @@ public class MapaCiudad {
                                 return true;
                             }
                         }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean eliminarVia(String nombreVia) {
+        for (int i = 0; i < matrizVias.length; i++) {
+            for (int j = 0; j < matrizVias[i].length; j++) {
+                Via via = matrizVias[i][j];
+                if (via != null) {
+                    if (via.getNombre().equals(nombreVia)) {
+                        matrizVias[i][j]=null;
+                        matrizVias[j][i]=null;
+                        return true;
                     }
                 }
             }

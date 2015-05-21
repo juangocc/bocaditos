@@ -86,6 +86,8 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
         jBGirarSentido = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jTFPeso = new javax.swing.JTextField();
+        jBElimVia = new javax.swing.JButton();
+        jTBElimInters = new javax.swing.JToggleButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -188,6 +190,15 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
 
         jTFPeso.setEditable(false);
 
+        jBElimVia.setText("Eliminar Via");
+        jBElimVia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBElimViaActionPerformed(evt);
+            }
+        });
+
+        jTBElimInters.setText("Eliminar Inters.");
+
         jMenu1.setText("File");
 
         jMenuItem5.setText("Abrir Mapa");
@@ -230,21 +241,6 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jCBSentido, javax.swing.GroupLayout.Alignment.LEADING, 0, 119, Short.MAX_VALUE)
-                                .addComponent(jBGirarSentido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jCBVias, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jCBInterseccionFinal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jCBInterseccionInicial, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4)
                             .addComponent(jCBCasas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -264,10 +260,28 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                                     .addComponent(jLabel8)))))
                     .addComponent(jCHBAutoAsignacion)
                     .addComponent(jLabel10)
-                    .addComponent(jTFPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jCBSentido, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBGirarSentido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCBVias, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jBElimVia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                                .addComponent(jTFPeso, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jCBInterseccionFinal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCBInterseccionInicial, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTBElimInters, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                         .addComponent(areaDeDibujo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(81, 81, 81)
@@ -300,7 +314,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                                 .addComponent(jTFUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jBHacerPedido)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
@@ -312,7 +326,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                                 .addComponent(jCBInterseccionFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1)
-                                .addGap(65, 65, 65))
+                                .addGap(58, 58, 58))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -326,8 +340,12 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel10)
                                 .addGap(1, 1, 1)
-                                .addComponent(jTFPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTFPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTBElimInters))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBElimVia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                         .addComponent(jCHBAutoAsignacion)
                         .addGap(3, 3, 3))
                     .addGroup(layout.createSequentialGroup()
@@ -417,7 +435,6 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
             String sentido = evt.getItem().toString();
             String nombreVia = jCBVias.getSelectedItem().toString();
             mapaCiudad.cambiarSentidoVia(nombreVia, sentido);
-            llenarComboBoxVias();
         }
     }//GEN-LAST:event_jCBSentidoItemStateChanged
 
@@ -452,6 +469,20 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
         llenarComboBoxVias();
         jCBVias.setSelectedItem(nombreVia);
     }//GEN-LAST:event_jBGirarSentidoActionPerformed
+
+    private void jBElimViaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBElimViaActionPerformed
+        Object objVia = jCBVias.getSelectedItem();
+        if (objVia != null) {
+            String nombreVia = objVia.toString();
+            if (mapaCiudad.eliminarVia(nombreVia)) {
+                JOptionPane.showMessageDialog(this, "Via " + nombreVia + " Eliminada con éxito");
+                llenarComboBoxVias();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay ninguna Via seleccionada");
+        }
+
+    }//GEN-LAST:event_jBElimViaActionPerformed
     public void llenarComboBoxIntersecciones() {
         LinkedList<Interseccion> listaIntersecciones = mapaCiudad.listaIntersecciones;
         jCBInterseccionInicial.removeAllItems();
@@ -477,6 +508,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
     public void llenarComboBoxVias() {
         LinkedList<Via> listaVias = mapaCiudad.getVias();
         jCBVias.removeAllItems();
+        jTFPeso.setText("");
         for (Via via : listaVias) {
             jCBVias.addItem(via.getNombre());
             jCBSentido.setSelectedItem(via.getSentido());
@@ -522,6 +554,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private bocaditos.AreaDeDibujo areaDeDibujo1;
+    private javax.swing.JButton jBElimVia;
     private javax.swing.JButton jBGirarSentido;
     private javax.swing.JButton jBHacerPedido;
     private javax.swing.JButton jButton1;
@@ -552,6 +585,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JToggleButton jTBElimInters;
     private javax.swing.JTextField jTFPeso;
     private javax.swing.JTextField jTFUser;
     // End of variables declaration//GEN-END:variables
