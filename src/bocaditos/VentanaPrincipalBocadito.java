@@ -435,6 +435,8 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
             String sentido = evt.getItem().toString();
             String nombreVia = jCBVias.getSelectedItem().toString();
             mapaCiudad.cambiarSentidoVia(nombreVia, sentido);
+            System.out.println("Cambiando Sentido ");
+            mapaCiudad.imprimirMapaCiudad();
         }
     }//GEN-LAST:event_jCBSentidoItemStateChanged
 
@@ -466,8 +468,9 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
     private void jBGirarSentidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGirarSentidoActionPerformed
         String nombreVia = jCBVias.getSelectedItem().toString();
         mapaCiudad.girarSentidoVia(nombreVia);
-        llenarComboBoxVias();
         jCBVias.setSelectedItem(nombreVia);
+        System.out.println("Girando ");
+        mapaCiudad.imprimirMapaCiudad();
     }//GEN-LAST:event_jBGirarSentidoActionPerformed
 
     private void jBElimViaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBElimViaActionPerformed

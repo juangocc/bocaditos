@@ -138,12 +138,13 @@ public class MapaCiudad {
                 Via via = matrizVias[i][j];
                 if (via != null) {
                     if (via.getNombre().equals(nombreVia)) {
+                        via.setSentido(sentido);
                         if (sentido.equals("Simple")) {
                             matrizVias[j][i] = null;
                         } else if (sentido.equals("Doble")) {
                             matrizVias[j][i] = via;
                         }
-                        via.setSentido(sentido);
+
                         return true;
                     }
                 }
@@ -158,8 +159,12 @@ public class MapaCiudad {
                 Via via = matrizVias[i][j];
                 if (via != null) {
                     if (via.getNombre().equals(nombreVia)) {
-                        matrizVias[i][j] = matrizVias[j][i];
-                        matrizVias[j][i] = via;
+                        if (via.getSentido().equals("Simple")) {
+                            matrizVias[i][j] = null;
+                            matrizVias[j][i] = via;
+                        }else if (via.getSentido().equals("Doble")) {
+                            matrizVias[j][i] = via;
+                        }                        
                         return true;
                     }
                 }
@@ -308,5 +313,21 @@ public class MapaCiudad {
             }
         }
         return false;
+    }
+
+    public void imprimirMapaCiudad() {
+        System.out.println("Mapa Ciudad \n");
+        for (int i = 0; i < matrizVias.length; i++) {
+            for (int j = 0; j < matrizVias[i].length; j++) {
+                Via via = matrizVias[i][j];
+                if (via != null) {
+                    int peso = via.getPeso();
+                    System.out.print(" " + peso);
+                }else{
+                    System.out.print(" 0");
+                }
+            }
+            System.out.println("");
+        }
     }
 }
