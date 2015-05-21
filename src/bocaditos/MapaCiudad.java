@@ -223,12 +223,12 @@ public class MapaCiudad {
         String prim = grafo.verMatriz(grafo.Prim(0).getGrafo());
 
         System.out.println("verMatriz : \n" + verMatriz + "\n");
-        System.out.println("floyWarshall : \n" + anchura + "\n");
-        System.out.println("Dijkstra : \n" + anchura + "\n");
-        System.out.println("Produndidad : \n" + anchura + "\n");
+        System.out.println("floyWarshall : \n" + floyMatriz + "\n");
+        System.out.println("Dijkstra : \n" + dijkstra + "\n");
+        System.out.println("Produndidad : \n" + profundidad + "\n");
         System.out.println("Anchura : \n" + anchura + "\n");
-        System.out.println("Kruskal : \n" + anchura + "\n");
-        System.out.println("Prim : \n" + anchura + "\n");
+        System.out.println("Kruskal : \n" + kruskal + "\n");
+        System.out.println("Prim : \n" + prim + "\n");
         //-----------------------
         rutaStr = profundidad;
         String[] rutaVec = rutaStr.split(" ");
