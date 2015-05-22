@@ -572,13 +572,13 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox1ItemStateChanged
 
     private void jBAgregarCamionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarCamionActionPerformed
-       Object objPuesto = jCBPuesto.getSelectedItem();
-        if (objPuesto!=null) {
-            String nombrePuesto= objPuesto.toString();
+        Object objPuesto = jCBPuesto.getSelectedItem();
+        if (objPuesto != null) {
+            String nombrePuesto = objPuesto.toString();
             LinkedList<PuestoComidaRapida> listaPuestos = mapaCiudad.listaPuestos;
             for (PuestoComidaRapida puesto : listaPuestos) {
                 if (puesto.getNombre().equals(nombrePuesto)) {
-                    Camion camion = new Camion("CM"+(puesto.getListaCamiones().size()+1), puesto.getPosX(), puesto.getPosY()+15, 15, 15);
+                    Camion camion = new Camion("CM" + (puesto.getListaCamiones().size() + 1), puesto.getPosX(), puesto.getPosY() + 15, 15, 15);
                     puesto.agregarCamion(camion);
                     jCBCamiones.addItem(camion.getNombre());
                     break;
@@ -588,8 +588,8 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
     }//GEN-LAST:event_jBAgregarCamionActionPerformed
 
     private void jCBPuestoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBPuestoItemStateChanged
-       Object objPuesto = jCBPuesto.getSelectedItem();
-        if (objPuesto!=null) {
+        Object objPuesto = jCBPuesto.getSelectedItem();
+        if (objPuesto != null) {
             String nombrePuesto = objPuesto.toString();
             LinkedList<PuestoComidaRapida> listaPuestos = mapaCiudad.listaPuestos;
             jCBCamiones.removeAllItems();
@@ -625,10 +625,10 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
     public void llenarComboBoxPuestos() {
         LinkedList<PuestoComidaRapida> listaCasas = mapaCiudad.listaPuestos;
         jCBPuesto.removeAllItems();
-        jCBCamiones.removeAllItems();
         for (PuestoComidaRapida puesto : listaCasas) {
             jCBPuesto.addItem(puesto.getNombre());
             LinkedList<Camion> listaCamiones = puesto.getListaCamiones();
+            jCBCamiones.removeAllItems();
             for (Camion camion : listaCamiones) {
                 jCBCamiones.addItem(camion.getNombre());
             }
