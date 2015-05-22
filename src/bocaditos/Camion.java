@@ -115,6 +115,8 @@ public class Camion extends Objeto {
                 intSiguiente = intSiguiente - 1;
                 if (intSiguiente < 0) {
                     setEstado("Disponible");
+                    rutaIdaRegreso=null;
+                    ruta=null;
                 }
             }
         }
