@@ -102,6 +102,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jTFCantProdAbasto = new javax.swing.JTextField();
         jBAgregarProdAbasto = new javax.swing.JButton();
+        jBMCS = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -290,6 +291,13 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
             }
         });
 
+        jBMCS.setText("Menor Cantidad de Suministro");
+        jBMCS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBMCSActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
 
         jMenuItem5.setText("Abrir Mapa");
@@ -402,10 +410,15 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                         .addComponent(areaDeDibujo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCBCrearAlClick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(81, 81, 81)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCBCrearAlClick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(jBMCS)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -501,7 +514,9 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                         .addComponent(jCHBAutoAsignacion)
                         .addGap(35, 35, 35))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
+                        .addGap(15, 15, 15)
+                        .addComponent(jBMCS)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jCBCrearAlClick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
@@ -612,6 +627,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
             CasaParticular casa = mapaCiudad.getCasa(ubicacionCasa);
             String nombreUser = "";
             jCBProdPed.removeAllItems();
+            jTFCantProdPed.setText("");
             if (casa.getUser() != null) {
                 nombreUser = casa.getUser().getNombre();
                 LinkedList<Producto> listaPedidoProducto = casa.getUser().listaPedido;
@@ -706,6 +722,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
             LinkedList<PuestoComidaRapida> listaPuestos = mapaCiudad.listaPuestos;
             jCBCamiones.removeAllItems();
             jCBProdAbasto.removeAllItems();
+            jTFCantProdAbasto.setText("");
             for (PuestoComidaRapida puesto : listaPuestos) {
                 if (puesto.getNombre().equals(nombrePuesto)) {
                     LinkedList<Camion> listaCamiones = puesto.getListaCamiones();
@@ -815,6 +832,32 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jCBProdAbastoItemStateChanged
+
+    private void jBMCSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMCSActionPerformed
+        String nombreProd = JOptionPane.showInputDialog("Nombre Producto :");
+        //String precioProd = JOptionPane.showInputDialog("Quiere agregar otro producto ?");
+        String cantidadProd = JOptionPane.showInputDialog("Cantidad :");
+        LinkedList<PuestoComidaRapida> listapPuesto = mapaCiudad.listaPuestos;
+        int menorCantidad = Integer.MAX_VALUE;
+        int indicePuesto = -1;
+        int count = 0;
+        for (PuestoComidaRapida puesto : listapPuesto) {
+            LinkedList<Producto> listaProductos = puesto.abastoProductos;
+
+            for (Producto prod : listaProductos) {
+                if (prod.getNombre().equals(nombreProd)) {
+                    if (menorCantidad > prod.getTamanio()) {
+                        menorCantidad = prod.getTamanio();
+                        indicePuesto = count;
+                    }
+                    break;
+                }
+            }
+            count++;
+        }
+        PuestoComidaRapida menorCantidadPuesto=listapPuesto.get(indicePuesto);
+        JOptionPane.showMessageDialog(this, "El Puesto : "+menorCantidadPuesto.getNombre()+" Tiene la menor cantidad de "+nombreProd+" con "+menorCantidad+" de unidades");
+    }//GEN-LAST:event_jBMCSActionPerformed
     public void llenarComboBoxIntersecciones() {
         LinkedList<Nodo> listaIntersecciones = mapaCiudad.listaIntersecciones;
         jCBInterseccionInicial.removeAllItems();
@@ -903,6 +946,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
     private javax.swing.JButton jBGirarSentido;
     private javax.swing.JButton jBHacerPedido;
     private javax.swing.JButton jBKruskal;
+    private javax.swing.JButton jBMCS;
     private javax.swing.JButton jBPrim;
     private javax.swing.JComboBox jCBCamiones;
     private javax.swing.JComboBox jCBCasas;
