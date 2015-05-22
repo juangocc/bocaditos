@@ -205,16 +205,16 @@ public class MapaCiudad {
         int[][] floyProcedencia = grafo.FloyWarshall().get(1);
         String floyWarshall = grafo.verMatriz(floyMatriz);
         String floyWarshallProcedencia = grafo.verMatriz(floyProcedencia);
-        String profundidad = grafo.recorrido(grafo.Profundidad());
-        String anchura = grafo.recorrido(grafo.Anchura());
-        String kruskal = grafo.verMatriz(grafo.KKruscal());
-        String prim = grafo.verMatriz(grafo.Prim(indiceIntersecc).getGrafo());
-        String fulkerson = grafo.fordFulkerson(indiceIntersecc, listaIntersecciones.size() - 1) + "";
 
         System.out.println("verMatriz : \n" + verMatriz + "\n");
         System.out.println("floyWarshall : \n" + floyWarshall + "\n");
         System.out.println("floyWarshall Procedencia: \n" + floyWarshallProcedencia + "\n");
         /*
+         String profundidad = grafo.recorrido(grafo.Profundidad());
+         String anchura = grafo.recorrido(grafo.Anchura());
+         String kruskal = grafo.verMatriz(grafo.KKruscal());
+         String prim = grafo.verMatriz(grafo.Prim(indiceIntersecc).getGrafo());
+         String fulkerson = grafo.fordFulkerson(indiceIntersecc, listaIntersecciones.size() - 1) + "";
          System.out.println("Produndidad : \n" + profundidad + "\n");
          System.out.println("Anchura : \n" + anchura + "\n");
          System.out.println("Kruskal : \n" + kruskal + "\n");
