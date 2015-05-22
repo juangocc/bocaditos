@@ -251,6 +251,12 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
 
         jLabel12.setText("Lista Productos Pedido");
 
+        jCBProdPed.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBProdPedItemStateChanged(evt);
+            }
+        });
+
         jBAgregarProdPedido.setText("Agregar Producto");
         jBAgregarProdPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,6 +264,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
             }
         });
 
+        jTFCantProdPed.setEditable(false);
         jTFCantProdPed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFCantProdPedActionPerformed(evt);
@@ -267,6 +274,8 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
         jLabel13.setText("Cantidad");
 
         jLabel14.setText("Cantidad");
+
+        jTFCantProdAbasto.setEditable(false);
 
         jBAgregarProdAbasto.setText("Agregar Producto");
 
@@ -597,11 +606,10 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                 LinkedList<Producto> listaPedidoProducto = casa.getUser().listaPedido;
                 for (Producto pedProd : listaPedidoProducto) {
                     jCBProdPed.addItem(pedProd.getNombre());
-                    jTFCantProdPed.setText(pedProd.getTamanio()+"");
+                    jTFCantProdPed.setText(pedProd.getTamanio() + "");
                 }
             }
-            jTFUser.setText(nombreUser);            
-            
+            jTFUser.setText(nombreUser);
         }
     }//GEN-LAST:event_jCBCasasItemStateChanged
 
@@ -719,7 +727,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                             user.agregarProductoAlPedido(new Producto(nombreProd, 10, Integer.parseInt(cantidadProd)));
                             jCBProdPed.addItem(nombreProd);
                             jTFCantProdPed.setText(cantidadProd);
-                            confirmación = JOptionPane.showConfirmDialog(null, "Quiere agregar otro producto ?");                       
+                            confirmación = JOptionPane.showConfirmDialog(null, "Quiere agregar otro producto ?");
                         }
                     } else {
                         JOptionPane.showMessageDialog(this, "Registre Usuario");
@@ -729,6 +737,25 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jBAgregarProdPedidoActionPerformed
+
+    private void jCBProdPedItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBProdPedItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            String ubicacionCasa = jCBCasas.getSelectedItem().toString();
+            CasaParticular casa = mapaCiudad.getCasa(ubicacionCasa);
+            String nombreUser = "";
+            if (casa.getUser() != null) {
+                String nombreProd = jCBProdPed.getSelectedItem().toString();
+                nombreUser = casa.getUser().getNombre();
+                LinkedList<Producto> listaPedidoProducto = casa.getUser().listaPedido;
+                for (Producto pedProd : listaPedidoProducto) {
+                    if (pedProd.getNombre().equals(nombreProd)) {
+                        jTFCantProdPed.setText(pedProd.getTamanio() + "");
+                        break;
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_jCBProdPedItemStateChanged
     public void llenarComboBoxIntersecciones() {
         LinkedList<Nodo> listaIntersecciones = mapaCiudad.listaIntersecciones;
         jCBInterseccionInicial.removeAllItems();

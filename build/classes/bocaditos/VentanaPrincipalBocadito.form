@@ -562,6 +562,9 @@
           <StringArray count="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCBProdPedItemStateChanged"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBAgregarProdPedido">
       <Properties>
@@ -572,6 +575,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFCantProdPed">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTFCantProdPedActionPerformed"/>
       </Events>
@@ -587,6 +593,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFCantProdAbasto">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jBAgregarProdAbasto">
       <Properties>
