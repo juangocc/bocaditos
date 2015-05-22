@@ -49,28 +49,7 @@ public class AreaDeDibujo extends javax.swing.JPanel {
                 Via[][] matrizVias = getMapaCiudad().matrizVias;
                 for (int i = 0; i < matrizVias.length; i++) {
                     Nodo interseccionInicial = listaIntersecciones.get(i);
-                    if (interseccionInicial instanceof CasaParticular) {
-                        g2.drawImage(listaimagenes[0], interseccionInicial.getPosX(), interseccionInicial.getPosY(), interseccionInicial.getAncho(), interseccionInicial.getAlto(), this);
-                    } else if (interseccionInicial instanceof PuestoComidaRapida) {
-                        g2.drawImage(listaimagenes[3], interseccionInicial.getPosX(), interseccionInicial.getPosY(), interseccionInicial.getAncho(), interseccionInicial.getAlto(), this);
-                        LinkedList<Camion> listaCamiones = ((PuestoComidaRapida) interseccionInicial).getListaCamiones();
-                        for (Camion camion : listaCamiones) {
-                            if (camion.direccion.equals("Derecha")) {
-                                g2.drawImage(listaimagenes[1], camion.getPosX(), camion.getPosY(), camion.getAncho(), camion.getAlto(), this);
-                            } else if (camion.direccion.equals("Izquierda")) {
-                                g2.drawImage(listaimagenes[2], camion.getPosX(), camion.getPosY(), camion.getAncho(), camion.getAlto(), this);
-                            }
-                            //g2.draw(camion.getArea());
-                            g2.drawString(camion.getNombre(), camion.getPosX() + 15, camion.getPosY() - 5);
-
-                            if (pintarRutaDomicilio) {
-                                pintarRuta(camion.rutaIdaRegreso, g2);
-                            }
-                        }
-                    } else {
-                        g2.draw(interseccionInicial.getArea());
-                    }
-                    g2.drawString(interseccionInicial.getNombre(), interseccionInicial.getPosX() - 5, interseccionInicial.getPosY() - 5);
+                    // Dibujar Vias
                     for (int j = 0; j < matrizVias[i].length; j++) {
                         Via via = matrizVias[i][j];
                         if (via != null) {
@@ -97,6 +76,29 @@ public class AreaDeDibujo extends javax.swing.JPanel {
                             }
                         }
                     }
+                    //-------------
+                    if (interseccionInicial instanceof CasaParticular) {
+                        g2.drawImage(listaimagenes[0], interseccionInicial.getPosX(), interseccionInicial.getPosY(), interseccionInicial.getAncho(), interseccionInicial.getAlto(), this);
+                    } else if (interseccionInicial instanceof PuestoComidaRapida) {
+                        g2.drawImage(listaimagenes[3], interseccionInicial.getPosX(), interseccionInicial.getPosY(), interseccionInicial.getAncho(), interseccionInicial.getAlto(), this);
+                        LinkedList<Camion> listaCamiones = ((PuestoComidaRapida) interseccionInicial).getListaCamiones();
+                        for (Camion camion : listaCamiones) {
+                            if (camion.direccion.equals("Derecha")) {
+                                g2.drawImage(listaimagenes[1], camion.getPosX(), camion.getPosY(), camion.getAncho(), camion.getAlto(), this);
+                            } else if (camion.direccion.equals("Izquierda")) {
+                                g2.drawImage(listaimagenes[2], camion.getPosX(), camion.getPosY(), camion.getAncho(), camion.getAlto(), this);
+                            }
+                            //g2.draw(camion.getArea());
+                            g2.drawString(camion.getNombre(), camion.getPosX() + 15, camion.getPosY() - 5);
+
+                            if (pintarRutaDomicilio) {
+                                pintarRuta(camion.rutaIdaRegreso, g2);
+                            }
+                        }
+                    } else {
+                        g2.draw(interseccionInicial.getArea());
+                    }
+                    g2.drawString(interseccionInicial.getNombre(), interseccionInicial.getPosX() - 5, interseccionInicial.getPosY() - 5);
                 }
             }
         } catch (Exception e) {
