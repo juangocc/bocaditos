@@ -166,6 +166,7 @@ public class MapaCiudad {
             for (PuestoComidaRapida puesto : listaPuestos) {
                 camion = puesto.getCamionDisponible();
                 if (camion != null) {
+                    puesto.hacerPedido(getCasa(nombreCasa).getUser().listaPedido);
                     camion.asignarRuta(rutaIdaRegreso);
                     return true;
                 }
