@@ -249,6 +249,12 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
 
         jLabel11.setText("Abasto Productos");
 
+        jCBProdAbasto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBProdAbastoItemStateChanged(evt);
+            }
+        });
+
         jLabel12.setText("Lista Productos Pedido");
 
         jCBProdPed.addItemListener(new java.awt.event.ItemListener() {
@@ -278,6 +284,11 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
         jTFCantProdAbasto.setEditable(false);
 
         jBAgregarProdAbasto.setText("Agregar Producto");
+        jBAgregarProdAbasto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAgregarProdAbastoActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
 
@@ -756,6 +767,49 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jCBProdPedItemStateChanged
+
+    private void jBAgregarProdAbastoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarProdAbastoActionPerformed
+        Object objPuesto = jCBPuesto.getSelectedItem();
+        if (objPuesto != null) {
+            String nombrePuesto = objPuesto.toString();
+            LinkedList<PuestoComidaRapida> listaPuestos = mapaCiudad.listaPuestos;
+            for (PuestoComidaRapida puesto : listaPuestos) {
+                if (puesto.getNombre().equals(nombrePuesto)) {
+                    int confirmación = 0;
+                    while (confirmación == 0) {
+                        String nombreProd = JOptionPane.showInputDialog("Nombre Producto :");
+                        //String precioProd = JOptionPane.showInputDialog("Quiere agregar otro producto ?");
+                        String cantidadProd = JOptionPane.showInputDialog("Cantidad :");
+                        puesto.agregarProductoAbasto(new Producto(nombreProd, 10, Integer.parseInt(cantidadProd)));
+                        jCBProdAbasto.addItem(nombreProd);
+                        jTFCantProdAbasto.setText(cantidadProd);
+                        confirmación = JOptionPane.showConfirmDialog(null, "Quiere agregar otro producto ?");
+                    }
+                    break;
+                }
+            }
+        }
+    }//GEN-LAST:event_jBAgregarProdAbastoActionPerformed
+
+    private void jCBProdAbastoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBProdAbastoItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            String nombrePuesto = jCBPuesto.getSelectedItem().toString();
+            LinkedList<PuestoComidaRapida> listaPuestos = mapaCiudad.listaPuestos;
+            for (PuestoComidaRapida puesto : listaPuestos) {
+                if (puesto.getNombre().equals(nombrePuesto)) {
+                    String nombreProd = jCBProdAbasto.getSelectedItem().toString();
+                    LinkedList<Producto> listaAbastoProducto = puesto.abastoProductos;
+                    for (Producto abastProd : listaAbastoProducto) {
+                        if (abastProd.getNombre().equals(nombreProd)) {
+                            jTFCantProdAbasto.setText(abastProd.getTamanio() + "");
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+    }//GEN-LAST:event_jCBProdAbastoItemStateChanged
     public void llenarComboBoxIntersecciones() {
         LinkedList<Nodo> listaIntersecciones = mapaCiudad.listaIntersecciones;
         jCBInterseccionInicial.removeAllItems();
