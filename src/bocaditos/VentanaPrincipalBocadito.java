@@ -591,10 +591,17 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
             String ubicacionCasa = jCBCasas.getSelectedItem().toString();
             CasaParticular casa = mapaCiudad.getCasa(ubicacionCasa);
             String nombreUser = "";
+            jCBProdPed.removeAllItems();
             if (casa.getUser() != null) {
                 nombreUser = casa.getUser().getNombre();
+                LinkedList<Producto> listaPedidoProducto = casa.getUser().listaPedido;
+                for (Producto pedProd : listaPedidoProducto) {
+                    jCBProdPed.addItem(pedProd.getNombre());
+                    jTFCantProdPed.setText(pedProd.getTamanio()+"");
+                }
             }
-            jTFUser.setText(nombreUser);
+            jTFUser.setText(nombreUser);            
+            
         }
     }//GEN-LAST:event_jCBCasasItemStateChanged
 
@@ -711,6 +718,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                             String cantidadProd = JOptionPane.showInputDialog("Cantidad :");
                             user.agregarProductoAlPedido(new Producto(nombreProd, 10, Integer.parseInt(cantidadProd)));
                             jCBProdPed.addItem(nombreProd);
+                            jTFCantProdPed.setText(cantidadProd);
                             confirmación = JOptionPane.showConfirmDialog(null, "Quiere agregar otro producto ?");                       
                         }
                     } else {
