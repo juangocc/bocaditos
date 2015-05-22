@@ -5,6 +5,8 @@
  */
 package bocaditos;
 
+import java.util.LinkedList;
+
 /**
  *
  * @author juangocc
@@ -14,11 +16,17 @@ public class Usuario {
     private String direccion;
     private String telefono;
     private String nombre;
+    LinkedList<Producto> listaPedido;
 
     public Usuario(String nombre, String direccion, String telefono) {
         this.direccion = direccion;
         this.telefono = telefono;
         this.nombre = nombre;
+        listaPedido = new LinkedList<>();
+    }
+
+    public void agregarProductoAlPedido(Producto producto) {
+        listaPedido.add(producto);
     }
 
     /**

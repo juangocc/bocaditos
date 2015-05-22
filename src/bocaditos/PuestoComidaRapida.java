@@ -12,21 +12,21 @@ import java.util.LinkedList;
  * @author juangocc
  */
 public class PuestoComidaRapida extends Nodo {
-
-    String[][] abastoProductos;
+    
+    LinkedList<Producto> abastoProductos;
     private LinkedList<Camion> listaCamiones;
-
+    
     public PuestoComidaRapida(String nombre, int posX, int posY, int ancho, int alto) {
         super(nombre, posX, posY, ancho, alto);
         listaCamiones = new LinkedList<>();
         Camion camion = new Camion("CM" + (getListaCamiones().size() + 1), posX, posY + 15, 20, 20, 5, 200);
         listaCamiones.add(camion);
     }
-
+    
     public void agregarCamion(Camion camion) {
         listaCamiones.add(camion);
     }
-
+    
     public Camion getCamionDisponible() {
         Camion camionDisp = null;
         for (Camion camion : listaCamiones) {
@@ -51,5 +51,5 @@ public class PuestoComidaRapida extends Nodo {
     public void setListaCamiones(LinkedList<Camion> listaCamiones) {
         this.listaCamiones = listaCamiones;
     }
-
+    
 }
