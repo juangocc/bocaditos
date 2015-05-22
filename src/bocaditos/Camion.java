@@ -65,6 +65,12 @@ public class Camion extends Objeto {
         double y1 = ruta.get(intActual).getPosY();
         double x2 = ruta.get(intSiguiente).getPosX();
         double y2 = ruta.get(intSiguiente).getPosY();
+        //---------------Direccion Camion
+        if (x2 < x1) {
+            direccion = "Izquierda";
+        } else {
+            direccion = "Derecha";
+        }
         // --------------Desplazar en X
         if (Math.abs(x1 - x2) > Math.abs(y1 - y2)) {
             if (x2 < x1) {
@@ -80,10 +86,8 @@ public class Camion extends Objeto {
         {
             if (y2 < y1) {
                 y -= velocidad;
-                direccion = "Izquierda";
             } else {
                 y += velocidad;
-                direccion = "Derecha";
             }
             // Ecuación de la Linea
             x = (((x2 - x1) / (y2 - y1)) * (y - y1)) + x1;
