@@ -19,7 +19,7 @@ public class PuestoComidaRapida extends Nodo {
     public PuestoComidaRapida(String nombre, int posX, int posY, int ancho, int alto) {
         super(nombre, posX, posY, ancho, alto);
         listaCamiones = new LinkedList<>();
-        Camion camion = new Camion("CM"+(getListaCamiones().size()+1), posX, posY+15, 15, 15);
+        Camion camion = new Camion("CM" + (getListaCamiones().size() + 1), posX, posY + 15, 15, 15, 5, 200);
         listaCamiones.add(camion);
     }
 

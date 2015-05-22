@@ -25,9 +25,10 @@ public class Camion extends Objeto {
     int capacidad;
     String direccion;
 
-    public Camion(String nombre, int posX, int posY, int ancho, int alto) {
+    public Camion(String nombre, int posX, int posY, int ancho, int alto, int velocidad, int capacidad) {
         super(nombre, posX, posY, ancho, alto);
-        this.velocidad = 5;
+        this.velocidad = velocidad;
+        this.capacidad = capacidad;
         this.posXInicial = posX;
         this.posYInicial = posY;
         direccion = "Derecha";

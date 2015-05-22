@@ -420,7 +420,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
         String accion = jCBCrearAlClick.getSelectedItem().toString();
         String nombre;
         String elemento = jCBCrearAlClick.getSelectedItem().toString();
-        if (jCHBAutoAsignacion.isSelected()) {
+        if (!jCHBAutoAsignacion.isSelected()) {
             nombre = JOptionPane.showInputDialog("Nombre :" + elemento);
         } else {
             nombre = elemento + "-" + (mapaCiudad.listaIntersecciones.size() + 1);
@@ -578,12 +578,22 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
             LinkedList<PuestoComidaRapida> listaPuestos = mapaCiudad.listaPuestos;
             for (PuestoComidaRapida puesto : listaPuestos) {
                 if (puesto.getNombre().equals(nombrePuesto)) {
-                    Camion camion = new Camion("CM" + (puesto.getListaCamiones().size() + 1), puesto.getPosX(), puesto.getPosY() + 15, 15, 15);
+                    String nombre = "";
+                    if (!jCHBAutoAsignacion.isSelected()) {
+                        nombre = JOptionPane.showInputDialog("Nombre Camión : ");
+                    } else {
+                        nombre = "CM" + (puesto.getListaCamiones().size() + 1);
+                    }
+                    String velStr = JOptionPane.showInputDialog(this, "Velocidad : ");
+                    String capStr = JOptionPane.showInputDialog(this, "Capacidad : ");
+                    Camion camion = new Camion(nombre, puesto.getPosX(), puesto.getPosY() + 15, 15, 15, Integer.parseInt(velStr), Integer.parseInt(capStr));
                     puesto.agregarCamion(camion);
                     jCBCamiones.addItem(camion.getNombre());
                     break;
                 }
             }
+        }else{
+            JOptionPane.showMessageDialog(this, "No hay ningún Puesto Seleccionado");
         }
     }//GEN-LAST:event_jBAgregarCamionActionPerformed
 
