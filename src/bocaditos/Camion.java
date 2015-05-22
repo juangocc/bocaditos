@@ -52,6 +52,9 @@ public class Camion extends Objeto {
                 setEstado("Regresando");
             }
             return true;
+        }else if (getEstado().equals("Estancado")) {
+            // necesita nueva ruta para desplazarse
+            return false;
         }
         double x = this.getPosX();
         double y = this.getPosY();
