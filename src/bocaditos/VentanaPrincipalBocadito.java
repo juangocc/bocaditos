@@ -705,11 +705,16 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
             String nombrePuesto = objPuesto.toString();
             LinkedList<PuestoComidaRapida> listaPuestos = mapaCiudad.listaPuestos;
             jCBCamiones.removeAllItems();
+            jCBProdAbasto.removeAllItems();
             for (PuestoComidaRapida puesto : listaPuestos) {
                 if (puesto.getNombre().equals(nombrePuesto)) {
                     LinkedList<Camion> listaCamiones = puesto.getListaCamiones();
                     for (Camion camion : listaCamiones) {
                         jCBCamiones.addItem(camion.getNombre());
+                    }
+                    LinkedList<Producto> listaAbastoProd = puesto.abastoProductos;
+                    for (Producto abastoProd : listaAbastoProd) {
+                        jCBProdAbasto.addItem(abastoProd.getNombre());
                     }
                     break;
                 }
