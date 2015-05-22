@@ -11,7 +11,7 @@ import java.util.LinkedList;
  *
  * @author juangocc
  */
-public class PuestoComidaRapida extends Casa {
+public class PuestoComidaRapida extends Nodo {
 
     private LinkedList<Camion> listaCamiones;
 

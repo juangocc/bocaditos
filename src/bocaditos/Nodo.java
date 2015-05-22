@@ -8,13 +8,12 @@ package bocaditos;
 /**
  *
  * @author juangocc
+ * @param <T>
  */
-public class Interseccion extends Objeto{
+public class Nodo extends Objeto {
 
-    public Interseccion(String nombre,int posX, int posY, int ancho, int alto) {
+    public Nodo(String nombre, int posX, int posY, int ancho, int alto) {
         super(nombre, posX, posY, ancho, alto);
     }
 
-    
-    
 }

@@ -13,54 +13,15 @@ import java.util.LinkedList;
  */
 public class Via {
 
-    private LinkedList<Casa> listaCasas;
-    private LinkedList<PuestoComidaRapida> listaPuestos;
     private String nombre;
     private String sentido;
-    private int peso;
+    private int distancia;
+    int cantFlujoCamiones;
 
-    public Via(String nombre, String sentido, int peso) {
-        listaCasas = new LinkedList<>();
-        listaPuestos = new LinkedList<>();
+    public Via(String nombre, String sentido, int distancia) {
         this.nombre = nombre;
         this.sentido = sentido;
-        this.peso = peso;
-    }
-
-    public void crearCasa(int posX, int posY) {
-        getListaCasas().add(new Casa("C" + (getListaCasas().size() + 1), posX - 10, posY - 10, 20, 20));
-    }
-
-    public void crearPuesto(int posX, int posY) {
-        getListaPuestos().add(new PuestoComidaRapida("P" + (getListaCasas().size() + 1), posX - 5, posY - 5, 10, 10));
-    }
-
-    /**
-     * @return the listaCasas
-     */
-    public LinkedList<Casa> getListaCasas() {
-        return listaCasas;
-    }
-
-    /**
-     * @param listaCasas the listaCasas to set
-     */
-    public void setListaCasas(LinkedList<Casa> listaCasas) {
-        this.listaCasas = listaCasas;
-    }
-
-    /**
-     * @return the listaPuestos
-     */
-    public LinkedList<PuestoComidaRapida> getListaPuestos() {
-        return listaPuestos;
-    }
-
-    /**
-     * @param listaPuestos the listaPuestos to set
-     */
-    public void setListaPuestos(LinkedList<PuestoComidaRapida> listaPuestos) {
-        this.listaPuestos = listaPuestos;
+        this.distancia = distancia;
     }
 
     /**
@@ -92,16 +53,17 @@ public class Via {
     }
 
     /**
-     * @return the peso
+     * @return the distancia
      */
-    public int getPeso() {
-        return peso;
+    public int getDistancia() {
+        return distancia;
     }
 
     /**
-     * @param peso the peso to set
+     * @param distancia the distancia to set
      */
-    public void setPeso(int peso) {
-        this.peso = peso;
+    public void setDistancia(int distancia) {
+        this.distancia = distancia;
     }
+
 }

@@ -64,7 +64,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
         areaDeDibujo1 = new bocaditos.AreaDeDibujo();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jBCrearVia = new javax.swing.JButton();
         jCBInterseccionInicial = new javax.swing.JComboBox();
         jCBInterseccionFinal = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
@@ -77,7 +77,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jCBSentido = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jCPuesto = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox();
         jCHBAutoAsignacion = new javax.swing.JCheckBox();
@@ -88,6 +88,8 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
         jTFPeso = new javax.swing.JTextField();
         jBElimVia = new javax.swing.JButton();
         jTBElimInters = new javax.swing.JToggleButton();
+        jBPrim = new javax.swing.JButton();
+        jBKruskal = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -121,10 +123,10 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
 
         jLabel2.setText("Intersección Final");
 
-        jButton1.setText("Crear Via");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBCrearVia.setText("Crear Via");
+        jBCrearVia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBCrearViaActionPerformed(evt);
             }
         });
 
@@ -204,6 +206,15 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
             }
         });
 
+        jBPrim.setText("Prim");
+        jBPrim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPrimActionPerformed(evt);
+            }
+        });
+
+        jBKruskal.setText("Kruskal");
+
         jMenu1.setText("File");
 
         jMenuItem5.setText("Abrir Mapa");
@@ -257,12 +268,17 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                                 .addGap(11, 11, 11)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jCPuesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8)))))
+                                    .addComponent(jLabel8)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jBPrim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jBKruskal, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addComponent(jCHBAutoAsignacion)
                     .addComponent(jLabel10)
                     .addGroup(layout.createSequentialGroup()
@@ -282,7 +298,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                             .addComponent(jCBInterseccionInicial, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBCrearVia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTBElimInters, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -307,14 +323,22 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jCBCasas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jCPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jBKruskal))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(4, 4, 4)
+                                        .addComponent(jBPrim, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTFUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -330,7 +354,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCBInterseccionFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1)
+                                .addComponent(jBCrearVia)
                                 .addGap(58, 58, 58))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
@@ -368,26 +392,26 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
     private void areaDeDibujo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_areaDeDibujo1MouseClicked
         String accion = jCBCrearAlClick.getSelectedItem().toString();
         String nombre;
-        if (accion.equals("Interseccion")) {
-            if (jCHBAutoAsignacion.isSelected()) {
-                nombre = JOptionPane.showInputDialog("Nombre de la Intersección");
-            } else {
-                nombre = "Inters-" + (mapaCiudad.listaIntersecciones.size() + 1);
-            }
-            if (nombre != null) {
-                mapaCiudad.crearInterseccion(nombre, evt.getX(), evt.getY());
-                llenarComboBoxIntersecciones();
-            }
-        } else if (accion.equals("Casa")) {
-            mapaCiudad.crearCasa("Casa", evt.getX(), evt.getY());
-            llenarComboBoxCasas();
-        } else if (accion.equals("Puesto")) {
-            mapaCiudad.crearCasa("Puesto", evt.getX(), evt.getY());
+        String elemento = jCBCrearAlClick.getSelectedItem().toString();
+        if (jCHBAutoAsignacion.isSelected()) {
+            nombre = JOptionPane.showInputDialog("Nombre :" + elemento);
+        } else {
+            nombre = elemento + "-" + (mapaCiudad.listaIntersecciones.size() + 1);
         }
-
+        if (nombre != null) {
+            if (accion.equals("Interseccion")) {
+                mapaCiudad.crearInterseccion(nombre, evt.getX(), evt.getY());
+            } else if (accion.equals("Casa")) {
+                mapaCiudad.crearCasa(evt.getX(), evt.getY());
+                llenarComboBoxCasas();
+            } else if (accion.equals("Puesto")) {
+                mapaCiudad.crearPuesto(evt.getX(), evt.getY());
+            }
+            llenarComboBoxIntersecciones();
+        }
     }//GEN-LAST:event_areaDeDibujo1MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBCrearViaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCrearViaActionPerformed
         Object nombreInterseccionInicial = jCBInterseccionInicial.getSelectedItem();
         Object nombreInterseccionFinal = jCBInterseccionFinal.getSelectedItem();
         if (nombreInterseccionInicial != null && nombreInterseccionFinal != null && nombreInterseccionInicial != nombreInterseccionFinal) {
@@ -401,7 +425,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "No hay Intersecciones seleccionadas");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBCrearViaActionPerformed
 
     private void jBHacerPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBHacerPedidoActionPerformed
         Object ubiCasa = jCBCasas.getSelectedItem();
@@ -450,7 +474,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
             String nombreVia = jCBVias.getSelectedItem().toString();
             Via via = mapaCiudad.getVia(nombreVia);
             jCBSentido.setSelectedItem(via.getSentido());
-            jTFPeso.setText(via.getPeso() + "");
+            jTFPeso.setText(via.getDistancia() + "");
         }
     }//GEN-LAST:event_jCBViasItemStateChanged
 
@@ -461,7 +485,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
     private void jCBCasasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBCasasItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             String ubicacionCasa = jCBCasas.getSelectedItem().toString();
-            Casa casa = mapaCiudad.getCasa(ubicacionCasa);
+            CasaParticular casa = mapaCiudad.getCasa(ubicacionCasa);
             String nombreUser = "";
             if (casa.getUser() != null) {
                 nombreUser = casa.getUser().getNombre();
@@ -504,25 +528,24 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No hay ninguna Intersección seleccionada");
         }
     }//GEN-LAST:event_jTBElimIntersActionPerformed
+
+    private void jBPrimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrimActionPerformed
+
+    }//GEN-LAST:event_jBPrimActionPerformed
     public void llenarComboBoxIntersecciones() {
-        LinkedList<Interseccion> listaIntersecciones = mapaCiudad.listaIntersecciones;
+        LinkedList<Nodo> listaIntersecciones = mapaCiudad.listaIntersecciones;
         jCBInterseccionInicial.removeAllItems();
         jCBInterseccionFinal.removeAllItems();
-        for (Interseccion inters : listaIntersecciones) {
+        for (Nodo inters : listaIntersecciones) {
             jCBInterseccionInicial.addItem(inters.getNombre());
             jCBInterseccionFinal.addItem(inters.getNombre());
         }
     }
 
     public void llenarComboBoxCasas() {
-
-        LinkedList<Via> listaVias = mapaCiudad.getVias();
-        jCBCasas.removeAllItems();
-        for (Via via : listaVias) {
-            LinkedList<Casa> listaCasas = via.getListaCasas();
-            for (Casa casa : listaCasas) {
-                jCBCasas.addItem(via.getNombre() + "-" + casa.getNombre());
-            }
+        LinkedList<CasaParticular> listaCasas = mapaCiudad.getCasas();
+        for (CasaParticular casa : listaCasas) {
+            jCBCasas.addItem(casa.getNombre());
         }
     }
 
@@ -533,7 +556,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
         for (Via via : listaVias) {
             jCBVias.addItem(via.getNombre());
             jCBSentido.setSelectedItem(via.getSentido());
-            jTFPeso.setText(via.getPeso() + "");
+            jTFPeso.setText(via.getDistancia() + "");
         }
     }
 
@@ -575,10 +598,12 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private bocaditos.AreaDeDibujo areaDeDibujo1;
+    private javax.swing.JButton jBCrearVia;
     private javax.swing.JButton jBElimVia;
     private javax.swing.JButton jBGirarSentido;
     private javax.swing.JButton jBHacerPedido;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBKruskal;
+    private javax.swing.JButton jBPrim;
     private javax.swing.JComboBox jCBCasas;
     private javax.swing.JComboBox jCBCrearAlClick;
     private javax.swing.JComboBox jCBInterseccionFinal;
@@ -586,7 +611,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
     private javax.swing.JComboBox jCBSentido;
     private javax.swing.JComboBox jCBVias;
     private javax.swing.JCheckBox jCHBAutoAsignacion;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jCPuesto;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

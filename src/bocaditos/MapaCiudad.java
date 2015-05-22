@@ -6,7 +6,6 @@
 package bocaditos;
 
 import grafos.Grafo;
-import java.awt.geom.Line2D;
 import java.util.LinkedList;
 
 /**
@@ -15,17 +14,21 @@ import java.util.LinkedList;
  */
 public class MapaCiudad {
 
-    LinkedList<Interseccion> listaIntersecciones;
+    LinkedList<Nodo> listaIntersecciones;
+    LinkedList<CasaParticular> listaCasas;
+    LinkedList<PuestoComidaRapida> listaPuestos;
     Via[][] matrizVias;
     Grafo grafo;
 
     public MapaCiudad() {
         listaIntersecciones = new LinkedList<>();
         matrizVias = new Via[0][0];
+        listaCasas = new LinkedList<>();
+        listaPuestos = new LinkedList<>();
     }
 
     public void crearInterseccion(String nombre, int posX, int posY) {
-        listaIntersecciones.add(new Interseccion(nombre, posX - 3, posY - 3, 6, 6));
+        listaIntersecciones.add(new Nodo(nombre, posX - 3, posY - 3, 6, 6));
         redimensionarMatrizVias();
     }
 
@@ -56,62 +59,30 @@ public class MapaCiudad {
         }
     }
 
-    public void crearCasa(String tipo, int posX, int posY) {
-        for (int i = 0; i < matrizVias.length; i++) {
-            for (int j = 0; j < matrizVias[i].length; j++) {
-                Via via = matrizVias[i][j];
-                if (via != null) {
-                    Interseccion intsInicial = listaIntersecciones.get(i);
-                    Interseccion intsFinal = listaIntersecciones.get(j);
-                    int posX1 = intsInicial.getPosX();
-                    int posY1 = intsInicial.getPosY();
-                    int posX2 = intsFinal.getPosX();
-                    int posY2 = intsFinal.getPosY();
-                    Line2D linea = new Line2D.Double(posX1, posY1, posX2, posY2);
-                    double dist = linea.ptLineDist(posX, posY);
-                    if (dist <= 1) {
-                        if (tipo.equals("Casa")) {
-                            via.crearCasa(posX, posY);
-                        } else if (tipo.equals("Puesto")) {
-                            via.crearPuesto(posX, posY);
-                        }
-                    }
-                }
-            }
-        }
+    public void crearCasa(int posX, int posY) {
+        CasaParticular cp = new CasaParticular("C" + listaCasas.size(), posX - 3, posY - 3, 15, 15);
+        listaCasas.add(cp);
+        listaIntersecciones.add(cp);
+        redimensionarMatrizVias();
     }
 
-    public Casa getCasa(String ubicacionCasa) {
-        String nombreVia = ubicacionCasa.split("-")[0];
-        String nombreCasa = ubicacionCasa.split("-")[1];
-        for (int i = 0; i < matrizVias.length; i++) {
-            for (int j = 0; j < matrizVias[i].length; j++) {
-                Via via = matrizVias[i][j];
-                if (via != null) {
-                    if (via.getNombre().equals(nombreVia)) {
-                        LinkedList<Casa> listaCasas = via.getListaCasas();
-                        for (Casa casaL : listaCasas) {
-                            if (casaL.getNombre().equals(nombreCasa)) {
-                                return casaL;
-                            }
-                        }
-                    }
-                }
+    public void crearPuesto(int posX, int posY) {
+        PuestoComidaRapida pc = new PuestoComidaRapida("P" + listaPuestos.size(), posX - 3, posY - 3, 10, 10);
+        listaPuestos.add(pc);
+        listaIntersecciones.add(pc);
+        redimensionarMatrizVias();
+    }
+
+    public CasaParticular getCasa(String nombreCasa) {
+        for (CasaParticular casaL : listaCasas) {
+            if (casaL.getNombre().equals(nombreCasa)) {
+                return casaL;
             }
         }
         return null;
     }
 
-    public LinkedList<Casa> getCasas() {
-        LinkedList<Casa> listaCasas = new LinkedList<>();
-        for (int i = 0; i < matrizVias.length; i++) {
-            for (int j = 0; j < matrizVias[i].length; j++) {
-                Via via = matrizVias[i][j];
-                if (via != null) {
-                    listaCasas.addAll(via.getListaCasas());
-                }
-            }
-        }
+    public LinkedList<CasaParticular> getCasas() {
         return listaCasas;
     }
 
@@ -186,29 +157,21 @@ public class MapaCiudad {
     }
 
     public boolean solicitudPedido(String ubicacionCasa) {
-        LinkedList<Interseccion> ruta = getRutaOptima(ubicacionCasa);
-        Interseccion intLast = listaIntersecciones.getLast();
+        LinkedList<Nodo> ruta = getRutaOptima(ubicacionCasa);
+        Nodo intLast = listaIntersecciones.getLast();
         Camion camion = null;
-        for (int i = 0; i < matrizVias.length; i++) {
-            for (int j = 0; j < matrizVias[i].length; j++) {
-                Via via = matrizVias[i][j];
-                if (via != null) {
-                    LinkedList<PuestoComidaRapida> listaPuestos = via.getListaPuestos();
-                    for (PuestoComidaRapida puesto : listaPuestos) {
-                        camion = puesto.getCamionDisponible();
-                        if (camion != null) {
-                            camion.asignarRuta(ruta);
-                            return true;
-                        }
-                    }
-                }
+        for (PuestoComidaRapida puesto : listaPuestos) {
+            camion = puesto.getCamionDisponible();
+            if (camion != null) {
+                camion.asignarRuta(ruta);
+                return true;
             }
         }
         return false;
     }
 
-    public LinkedList<Interseccion> getRutaOptima(String ubicacionCasa) {
-        LinkedList<Interseccion> rutaOptima = new LinkedList<>();
+    public LinkedList<Nodo> getRutaOptima(String ubicacionCasa) {
+        LinkedList<Nodo> rutaOptima = new LinkedList<>();
         //-----------------
         int[][] grafoPesos = new int[listaIntersecciones.size()][listaIntersecciones.size()];
         int numAristas = 0;
@@ -216,7 +179,7 @@ public class MapaCiudad {
             for (int j = 0; j < matrizVias[i].length; j++) {
                 Via via = matrizVias[i][j];
                 if (via != null) {
-                    grafoPesos[i][j] = via.getPeso();
+                    grafoPesos[i][j] = via.getDistancia();
                     numAristas++;
                 }
             }
@@ -231,6 +194,7 @@ public class MapaCiudad {
         String anchura = grafo.recorrido(grafo.Anchura());
         String kruskal = grafo.verMatriz(grafo.KKruscal());
         String prim = grafo.verMatriz(grafo.Prim(0).getGrafo());
+        String fulkerson = grafo.fordFulkerson(0, 5) + "";
 
         System.out.println("verMatriz : \n" + verMatriz + "\n");
         System.out.println("floyWarshall : \n" + floyMatriz + "\n");
@@ -239,6 +203,7 @@ public class MapaCiudad {
         System.out.println("Anchura : \n" + anchura + "\n");
         System.out.println("Kruskal : \n" + kruskal + "\n");
         System.out.println("Prim : \n" + prim + "\n");
+        System.out.println("Fulkerson : \n" + fulkerson + "\n");
         //-----------------------
         rutaStr = profundidad;
         String[] rutaVec = rutaStr.split(" ");
@@ -252,46 +217,23 @@ public class MapaCiudad {
     }
 
     public void desplazarCamiones() {
-        //recorro todas las vias
-        for (int i = 0; i < matrizVias.length; i++) {
-            for (int j = 0; j < matrizVias[i].length; j++) {
-                Via via = matrizVias[i][j];
-                if (via != null) {
-                    // obtengo todos los puestos
-                    LinkedList<PuestoComidaRapida> listaPuestos = via.getListaPuestos();
-
-                    for (PuestoComidaRapida puesto : listaPuestos) {
-                        // obtengo todos sus comiones
-                        LinkedList<Camion> listaCamiones = puesto.getListaCamiones();
-                        for (Camion camion : listaCamiones) {
-                            // desplazo los camiones que tienen estado no disponible
-                            if (!camion.getEstado().equals("Disponible") && !camion.getEstado().equals("Varado")) {
-                                camion.desplazarCamionPedido();
-                            }
-                        }
-                    }
+        for (PuestoComidaRapida puesto : listaPuestos) {
+            // obtengo todos sus comiones
+            LinkedList<Camion> listaCamiones = puesto.getListaCamiones();
+            for (Camion camion : listaCamiones) {
+                // desplazo los camiones que tienen estado no disponible
+                if (!camion.getEstado().equals("Disponible") && !camion.getEstado().equals("Varado")) {
+                    camion.desplazarCamionPedido();
                 }
             }
         }
     }
 
-    public boolean registrarUsuario(String ubicacionCasa, Usuario nuevoUsuario) {
-        String nombreVia = ubicacionCasa.split("-")[0];
-        String nombreCasa = ubicacionCasa.split("-")[1];
-        for (int i = 0; i < matrizVias.length; i++) {
-            for (int j = 0; j < matrizVias[i].length; j++) {
-                Via via = matrizVias[i][j];
-                if (via != null) {
-                    if (via.getNombre().equals(nombreVia)) {
-                        LinkedList<Casa> listaCasas = via.getListaCasas();
-                        for (Casa casa : listaCasas) {
-                            if (casa.getNombre().equals(nombreCasa)) {
-                                casa.setUser(nuevoUsuario);
-                                return true;
-                            }
-                        }
-                    }
-                }
+    public boolean registrarUsuario(String nombreCasa, Usuario nuevoUsuario) {
+        for (CasaParticular casa : listaCasas) {
+            if (casa.getNombre().equals(nombreCasa)) {
+                casa.setUser(nuevoUsuario);
+                return true;
             }
         }
         return false;
@@ -319,7 +261,7 @@ public class MapaCiudad {
             for (int j = 0; j < matrizVias[i].length; j++) {
                 Via via = matrizVias[i][j];
                 if (via != null) {
-                    int peso = via.getPeso();
+                    int peso = via.getDistancia();
                     System.out.print(" " + peso);
                 } else {
                     System.out.print(" 0");
@@ -332,7 +274,7 @@ public class MapaCiudad {
     public void eliminarInterseccion(String nombreInterseccionInicial) {
         int indiceInters = -1;
         for (int i = 0; i < listaIntersecciones.size(); i++) {
-            Interseccion inters = listaIntersecciones.get(i);
+            Nodo inters = listaIntersecciones.get(i);
             if (inters.getNombre().equals(nombreInterseccionInicial)) {
                 indiceInters = i;
                 break;

@@ -14,7 +14,7 @@ import java.util.LinkedList;
  */
 public class Camion extends Objeto {
 
-    LinkedList<Interseccion> ruta;
+    LinkedList<Nodo> ruta;
     int intActual;
     int intSiguiente;
     int velocidad;
@@ -30,7 +30,7 @@ public class Camion extends Objeto {
         this.posYInicial = posY;
     }
 
-    public void asignarRuta(LinkedList<Interseccion> ruta) {
+    public void asignarRuta(LinkedList<Nodo> ruta) {
         this.ruta = ruta;
         intActual = ruta.size() - 1;
         intSiguiente = ruta.size() - 2;

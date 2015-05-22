@@ -34,8 +34,7 @@ public class Grafos {
         G.CrearArista(3, 5,3);
         G.CrearArista(5, 4,2);
         
-        //System.out.println(G.MostrarMatriz());
-       System.out.println(G.fordFulkerson(0,4));       
+            
        */
         Grafo G=new Grafo(6);
         // Punto Inicial, Punto Final, Costo
@@ -51,8 +50,9 @@ public class Grafos {
         G.CrearArista(5, 4, 2);
         //System.out.println(G.MostrarMatriz());
         //System.out.println(G.verMatriz(G.FloyWarshall().get(0)));
-        //System.out.println(G.Dijkstra(1));
-        System.out.println(G.recorrido(G.Profundidad()));
+        System.out.println(G.Dijkstra(1));
+        //System.out.println(G.fordFulkerson(0,4));  
+        //System.out.println(G.recorrido(G.Profundidad()));
         //System.out.println(G.recorrido(G.Anchura()));
         //System.out.println(G.verMatriz(G.KKruscal()));
         //System.out.println(G.verMatriz(G.Prim(0).getGrafo()));

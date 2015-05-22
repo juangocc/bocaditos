@@ -96,11 +96,8 @@ public class Grafo {
             for (int j = this.Vertices - 1; j >= 0; j--) {
 
                 if (this.Grafo[tem][j] != 0 && !vec.contains(j)) {
-
                     pila.push(j);
-
                 }
-
             }
             vec.add(tem);
         }

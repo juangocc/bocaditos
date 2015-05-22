@@ -9,11 +9,11 @@ package bocaditos;
  *
  * @author juangocc
  */
-public class Casa extends Objeto {
+public class CasaParticular extends Nodo {
 
     private Usuario user;
 
-    public Casa(String nombre, int posX, int posY, int ancho, int alto) {
+    public CasaParticular(String nombre, int posX, int posY, int ancho, int alto) {
         super(nombre, posX, posY, ancho, alto);
     }
 
