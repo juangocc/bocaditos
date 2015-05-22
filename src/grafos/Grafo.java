@@ -185,11 +185,13 @@ public class Grafo {
         return Res;
 
     }
+    private int[] VectorDijktra;
+    private int[] VectorVert;
 
     public String Dijkstra(int Vinicial) {
         int Vaux = Vinicial;
-        int[] VectorDijktra = new int[Vertices];
-        int[] VectorVert = new int[Vertices];
+        setVectorDijktra(new int[Vertices]);
+        setVectorVert(new int[Vertices]);
         boolean[] VectorMarcados = new boolean[Vertices];
 
         Queue<Integer> Cola = new LinkedList();
@@ -198,19 +200,19 @@ public class Grafo {
 
         for (int i = 0; i < Vertices; i++) // marcamos todo como infinito
         {
-            VectorDijktra[i] = Integer.MAX_VALUE;
+            getVectorDijktra()[i] = Integer.MAX_VALUE;
 
         }
 
         VectorMarcados[Vinicial] = true;
-        VectorDijktra[Vinicial] = 0;
+        getVectorDijktra()[Vinicial] = 0;
 
         while (!Cola.isEmpty()) {
 
             int tem = Cola.remove();
             if (tem != 0) {
                 for (int i = 0; i < Vertices; i++) {
-                    if (VectorDijktra[i] == tem && !VectorMarcados[i]) /// asignar vertices con costo menor actual del vectordijktra
+                    if (getVectorDijktra()[i] == tem && !VectorMarcados[i]) /// asignar vertices con costo menor actual del vectordijktra
                     {
                         Vaux = i;
                         break;
@@ -219,18 +221,18 @@ public class Grafo {
             }
 
             for (int i = 0; i < Vertices; i++) {
-                if (Grafo[Vaux][i] != 0 && VectorDijktra[i] > Grafo[Vaux][i] + VectorDijktra[Vaux] && !VectorMarcados[i] && Vaux != i) // si el costo es menor al que ya esta
+                if (Grafo[Vaux][i] != 0 && getVectorDijktra()[i] > Grafo[Vaux][i] + getVectorDijktra()[Vaux] && !VectorMarcados[i] && Vaux != i) // si el costo es menor al que ya esta
                 {
-                    VectorDijktra[i] = Grafo[Vaux][i] + VectorDijktra[Vaux];
-                    VectorVert[i] = Vaux;
+                    getVectorDijktra()[i] = Grafo[Vaux][i] + getVectorDijktra()[Vaux];
+                    getVectorVert()[i] = Vaux;
                 } else if (Vaux == i) {
                     VectorMarcados[i] = true;
                 }
             }
             for (int i = 0; i < Vertices; i++) {
-                if (VectorDijktra[i] != 0 && VectorDijktra[i] != Integer.MAX_VALUE && !VectorMarcados[i])// agregar a la cola todos los costo actuales
+                if (getVectorDijktra()[i] != 0 && getVectorDijktra()[i] != Integer.MAX_VALUE && !VectorMarcados[i])// agregar a la cola todos los costo actuales
                 {
-                    Cola.add(VectorDijktra[i]);
+                    Cola.add(getVectorDijktra()[i]);
                 }
             }
 
@@ -239,10 +241,10 @@ public class Grafo {
 
         String Resultado = "";
         for (int i = 0; i < this.Vertices; i++) {
-            if (VectorDijktra[i] == Integer.MAX_VALUE) {
+            if (getVectorDijktra()[i] == Integer.MAX_VALUE) {
                 Resultado += "De: " + Vinicial + " a " + i + " ND\n";
             } else {
-                Resultado += "De: " + Vinicial + " a " + i + " se llega por: " + VectorVert[i] + " con un costo: " + VectorDijktra[i] + "\n";
+                Resultado += "De: " + Vinicial + " a " + i + " se llega por: " + getVectorVert()[i] + " con un costo: " + getVectorDijktra()[i] + "\n";
             }
 
         }
@@ -432,7 +434,7 @@ public class Grafo {
             }
         }
 
-    // si tidavia exixte un camino retorna falso o verdadero
+        // si tidavia exixte un camino retorna falso o verdadero
         return visitado[Vfin];
     }
 
@@ -461,7 +463,7 @@ public class Grafo {
                 FlujoArist = Math.min(FlujoArist, MiGrafo[u][v]);
             }
 
-        // crea residual
+            // crea residual
             // recorriendo el camino
             for (v = Vfin; v != Vin; v = padre[v]) {
                 u = padre[v];
@@ -474,6 +476,34 @@ public class Grafo {
         }
 
         return FlujoMax;
+    }
+
+    /**
+     * @return the VectorDijktra
+     */
+    public int[] getVectorDijktra() {
+        return VectorDijktra;
+    }
+
+    /**
+     * @param VectorDijktra the VectorDijktra to set
+     */
+    public void setVectorDijktra(int[] VectorDijktra) {
+        this.VectorDijktra = VectorDijktra;
+    }
+
+    /**
+     * @return the VectorVert
+     */
+    public int[] getVectorVert() {
+        return VectorVert;
+    }
+
+    /**
+     * @param VectorVert the VectorVert to set
+     */
+    public void setVectorVert(int[] VectorVert) {
+        this.VectorVert = VectorVert;
     }
 
 }

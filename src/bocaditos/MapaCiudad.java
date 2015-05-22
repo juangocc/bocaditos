@@ -156,8 +156,8 @@ public class MapaCiudad {
         return null;
     }
 
-    public boolean solicitudPedido(String ubicacionCasa) {
-        LinkedList<Nodo> ruta = getRutaOptima(ubicacionCasa);
+    public boolean solicitudPedido(String nombreCasa) {
+        LinkedList<Nodo> ruta = getRutaOptima(nombreCasa);
         Nodo intLast = listaIntersecciones.getLast();
         Camion camion = null;
         for (PuestoComidaRapida puesto : listaPuestos) {
@@ -170,7 +170,14 @@ public class MapaCiudad {
         return false;
     }
 
-    public LinkedList<Nodo> getRutaOptima(String ubicacionCasa) {
+    public LinkedList<Nodo> getRutaOptima(String nombreCasa) {
+        int indiceIntersecc = -1;
+        for (int i = 0; i < listaIntersecciones.size(); i++) {
+            if (listaIntersecciones.get(i).getNombre().equals(nombreCasa)) {
+                indiceIntersecc = i;
+                break;
+            }
+        }
         LinkedList<Nodo> rutaOptima = new LinkedList<>();
         //-----------------
         int[][] grafoPesos = new int[listaIntersecciones.size()][listaIntersecciones.size()];
@@ -189,12 +196,12 @@ public class MapaCiudad {
         String rutaStr = "";
         String verMatriz = grafo.MostrarMatriz();
         String floyMatriz = grafo.verMatriz(grafo.FloyWarshall().get(0));
-        String dijkstra = grafo.Dijkstra(1);
+        String dijkstra = grafo.Dijkstra(indiceIntersecc);
         String profundidad = grafo.recorrido(grafo.Profundidad());
         String anchura = grafo.recorrido(grafo.Anchura());
         String kruskal = grafo.verMatriz(grafo.KKruscal());
-        String prim = grafo.verMatriz(grafo.Prim(0).getGrafo());
-        String fulkerson = grafo.fordFulkerson(0, 5) + "";
+        String prim = grafo.verMatriz(grafo.Prim(indiceIntersecc).getGrafo());
+        String fulkerson = grafo.fordFulkerson(indiceIntersecc, 5) + "";
 
         System.out.println("verMatriz : \n" + verMatriz + "\n");
         System.out.println("floyWarshall : \n" + floyMatriz + "\n");
@@ -207,6 +214,8 @@ public class MapaCiudad {
         //-----------------------
         rutaStr = profundidad;
         String[] rutaVec = rutaStr.split(" ");
+        int[] VectorDijktra = grafo.getVectorDijktra();
+        int[] VectorVert = grafo.getVectorVert();
 
         for (String intStr : rutaVec) {
             int indiceInters = Integer.parseInt(intStr);

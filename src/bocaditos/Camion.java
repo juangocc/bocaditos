@@ -74,12 +74,7 @@ public class Camion extends Objeto {
         setPosX((int) x);
         setPosY((int) y);
         // si ya a llegado a la siguiente intersección, remplazar la actual por la siguiente , y la siguiente por la siguiente de ella en la ruta
-        if (getEstado().equals("Regresando") && intSiguiente == (ruta.size() - 1)) {
-            Rectangle2D areaInicial = new Rectangle2D.Double(posXInicial, posYInicial, 10, 10);
-            if (areaInicial.intersects(x, y, getAncho(), getAlto())) {
-                setEstado("Disponible");
-            }
-        } else if (ruta.get(intSiguiente).getArea().intersects(x, y, getAncho(), getAlto())) {
+        if (ruta.get(intSiguiente).getArea().intersects(x, y, getAncho(), getAlto())) {
             intActual = intSiguiente;
             if (getEstado().equals("Ocupado")) {
                 intSiguiente = intSiguiente - 1;
@@ -90,6 +85,10 @@ public class Camion extends Objeto {
                 }
             } else if (getEstado().equals("Regresando")) {
                 intSiguiente = intSiguiente + 1;
+                if (intSiguiente > ruta.size() - 1) {
+                    setEstado("Disponible");
+                    intSiguiente = 1;
+                }
             }
         }
         // si ya es el final de la ruta, cambiar a estado Entrega

@@ -40,7 +40,7 @@ public class AreaDeDibujo extends javax.swing.JPanel {
                     } else if (interseccionInicial instanceof PuestoComidaRapida) {
                         LinkedList<Camion> listaCamiones = ((PuestoComidaRapida) interseccionInicial).getListaCamiones();
                         for (Camion camion : listaCamiones) {
-                            g2.drawString(camion.getNombre(), camion.getPosX() - 5, camion.getPosY() - 5);
+                            g2.drawString(camion.getNombre(), camion.getPosX() +15, camion.getPosY() -5);
                             g2.draw(camion.getArea());
                         }
                     }

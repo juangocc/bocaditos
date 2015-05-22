@@ -544,6 +544,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
 
     public void llenarComboBoxCasas() {
         LinkedList<CasaParticular> listaCasas = mapaCiudad.getCasas();
+        jCBCasas.removeAllItems();
         for (CasaParticular casa : listaCasas) {
             jCBCasas.addItem(casa.getNombre());
         }
