@@ -225,10 +225,11 @@ public class MapaCiudad {
                 }
             }
         }
-        int procedencia = VectorVert[indiceIntersecc];
-        System.out.println("---- "+indiceIntersecc);
-        rutaOptima.add(listaIntersecciones.get(indiceIntersecc));
-        String rutaStr = indiceIntersecc + ",";
+        int procedencia = VectorVert[indicePuesto];
+        System.out.println("---- "+indicePuesto);
+        System.out.println("---- "+procedencia);
+        rutaOptima.add(listaIntersecciones.get(indicePuesto));
+        String rutaStr = indicePuesto + ",";
         while (procedencia != -1) {
             System.out.println("---- "+procedencia);
             rutaOptima.add(listaIntersecciones.get(procedencia));
