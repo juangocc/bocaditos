@@ -193,7 +193,6 @@ public class MapaCiudad {
         }
         grafo = new Grafo(grafoPesos, listaIntersecciones.size(), numAristas);
         //-----------
-        String rutaStr = "";
         String verMatriz = grafo.MostrarMatriz();
         String floyMatriz = grafo.verMatriz(grafo.FloyWarshall().get(0));
         String dijkstra = grafo.Dijkstra(indiceIntersecc);
@@ -201,7 +200,7 @@ public class MapaCiudad {
         String anchura = grafo.recorrido(grafo.Anchura());
         String kruskal = grafo.verMatriz(grafo.KKruscal());
         String prim = grafo.verMatriz(grafo.Prim(indiceIntersecc).getGrafo());
-        String fulkerson = grafo.fordFulkerson(indiceIntersecc, 5) + "";
+        String fulkerson = grafo.fordFulkerson(indiceIntersecc, listaIntersecciones.size()-1) + "";
 
         System.out.println("verMatriz : \n" + verMatriz + "\n");
         System.out.println("floyWarshall : \n" + floyMatriz + "\n");
@@ -212,16 +211,37 @@ public class MapaCiudad {
         System.out.println("Prim : \n" + prim + "\n");
         System.out.println("Fulkerson : \n" + fulkerson + "\n");
         //-----------------------
-        rutaStr = profundidad;
-        String[] rutaVec = rutaStr.split(" ");
         int[] VectorDijktra = grafo.getVectorDijktra();
         int[] VectorVert = grafo.getVectorVert();
-
-        for (String intStr : rutaVec) {
-            int indiceInters = Integer.parseInt(intStr);
-            rutaOptima.add(listaIntersecciones.get(indiceInters));
+        int menorDistanciaAPuesto = Integer.MAX_VALUE;
+        int indicePuesto = -1;
+        for (int i = 0; i < VectorDijktra.length; i++) {
+            if (VectorDijktra[indiceIntersecc] != Integer.MAX_VALUE) {
+                if (listaIntersecciones.get(i) instanceof PuestoComidaRapida) {
+                    if (menorDistanciaAPuesto > VectorDijktra[i]) {
+                        menorDistanciaAPuesto = VectorDijktra[i];
+                        indicePuesto = i;
+                    }
+                }
+            }
         }
+        int procedencia = VectorVert[indiceIntersecc];
+        System.out.println("---- "+indiceIntersecc);
+        rutaOptima.add(listaIntersecciones.get(indiceIntersecc));
+        String rutaStr = indiceIntersecc + ",";
+        while (procedencia != -1) {
+            System.out.println("---- "+procedencia);
+            rutaOptima.add(listaIntersecciones.get(procedencia));
+            rutaStr += procedencia + ",";
+            procedencia = VectorVert[procedencia];
+        }
+        System.out.println("Ruta Optima : " + rutaStr);
+        //for (String intStr : rutaVec) {
+        //  int indiceInters = Integer.parseInt(intStr);
+        //rutaOptima.add(listaIntersecciones.get(indiceInters));
+        //}
         //-------------
+
         return rutaOptima;
     }
 

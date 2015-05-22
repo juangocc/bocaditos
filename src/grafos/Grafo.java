@@ -192,6 +192,9 @@ public class Grafo {
         int Vaux = Vinicial;
         setVectorDijktra(new int[Vertices]);
         setVectorVert(new int[Vertices]);
+        for (int i = 0; i < Vertices; i++) {
+            VectorVert[i] = -1;
+        }
         boolean[] VectorMarcados = new boolean[Vertices];
 
         Queue<Integer> Cola = new LinkedList();

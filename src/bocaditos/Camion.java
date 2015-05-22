@@ -32,10 +32,12 @@ public class Camion extends Objeto {
 
     public void asignarRuta(LinkedList<Nodo> ruta) {
         this.ruta = ruta;
-        intActual = ruta.size() - 1;
-        intSiguiente = ruta.size() - 2;
-        // validar que la ruta tenga mas de una interseccion, o si no indica que esta en el final del recorrido
-        setEstado("Ocupado");
+        if (ruta.size() > 1) {
+            intActual = ruta.size() - 1;
+            intSiguiente = ruta.size() - 2;
+            // validar que la ruta tenga mas de una interseccion, o si no indica que esta en el final del recorrido
+            setEstado("Ocupado");
+        }
     }
 
     public boolean desplazarCamionPedido() {
