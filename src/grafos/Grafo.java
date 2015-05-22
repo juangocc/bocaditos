@@ -203,19 +203,19 @@ public class Grafo {
 
         for (int i = 0; i < Vertices; i++) // marcamos todo como infinito
         {
-            getVectorDijktra()[i] = Integer.MAX_VALUE;
+            getVectorDijkstra()[i] = Integer.MAX_VALUE;
 
         }
 
         VectorMarcados[Vinicial] = true;
-        getVectorDijktra()[Vinicial] = 0;
+        getVectorDijkstra()[Vinicial] = 0;
 
         while (!Cola.isEmpty()) {
 
             int tem = Cola.remove();
             if (tem != 0) {
                 for (int i = 0; i < Vertices; i++) {
-                    if (getVectorDijktra()[i] == tem && !VectorMarcados[i]) /// asignar vertices con costo menor actual del vectordijktra
+                    if (getVectorDijkstra()[i] == tem && !VectorMarcados[i]) /// asignar vertices con costo menor actual del vectordijktra
                     {
                         Vaux = i;
                         break;
@@ -224,18 +224,18 @@ public class Grafo {
             }
 
             for (int i = 0; i < Vertices; i++) {
-                if (Grafo[Vaux][i] != 0 && getVectorDijktra()[i] > Grafo[Vaux][i] + getVectorDijktra()[Vaux] && !VectorMarcados[i] && Vaux != i) // si el costo es menor al que ya esta
+                if (Grafo[Vaux][i] != 0 && getVectorDijkstra()[i] > Grafo[Vaux][i] + getVectorDijkstra()[Vaux] && !VectorMarcados[i] && Vaux != i) // si el costo es menor al que ya esta
                 {
-                    getVectorDijktra()[i] = Grafo[Vaux][i] + getVectorDijktra()[Vaux];
+                    getVectorDijkstra()[i] = Grafo[Vaux][i] + getVectorDijkstra()[Vaux];
                     getVectorVert()[i] = Vaux;
                 } else if (Vaux == i) {
                     VectorMarcados[i] = true;
                 }
             }
             for (int i = 0; i < Vertices; i++) {
-                if (getVectorDijktra()[i] != 0 && getVectorDijktra()[i] != Integer.MAX_VALUE && !VectorMarcados[i])// agregar a la cola todos los costo actuales
+                if (getVectorDijkstra()[i] != 0 && getVectorDijkstra()[i] != Integer.MAX_VALUE && !VectorMarcados[i])// agregar a la cola todos los costo actuales
                 {
-                    Cola.add(getVectorDijktra()[i]);
+                    Cola.add(getVectorDijkstra()[i]);
                 }
             }
 
@@ -244,10 +244,10 @@ public class Grafo {
 
         String Resultado = "";
         for (int i = 0; i < this.Vertices; i++) {
-            if (getVectorDijktra()[i] == Integer.MAX_VALUE) {
+            if (getVectorDijkstra()[i] == Integer.MAX_VALUE) {
                 Resultado += "De: " + Vinicial + " a " + i + " ND\n";
             } else {
-                Resultado += "De: " + Vinicial + " a " + i + " se llega por: " + getVectorVert()[i] + " con un costo: " + getVectorDijktra()[i] + "\n";
+                Resultado += "De: " + Vinicial + " a " + i + " se llega por: " + getVectorVert()[i] + " con un costo: " + getVectorDijkstra()[i] + "\n";
             }
 
         }
@@ -258,6 +258,11 @@ public class Grafo {
 
     public LinkedList<int[][]> FloyWarshall() {
         int[][] Procedencia = new int[Vertices][Vertices];
+        for (int i = 0; i < Procedencia.length; i++) {
+            for (int j = 0; j < Procedencia[i].length; j++) {
+                Procedencia[i][j] = -1;
+            }
+        }
         int[][] Matriz = new int[Vertices][Vertices];
 
         for (int i = 0; i < Vertices; i++)//Llenado de Matrices iniciales
@@ -484,7 +489,7 @@ public class Grafo {
     /**
      * @return the VectorDijktra
      */
-    public int[] getVectorDijktra() {
+    public int[] getVectorDijkstra() {
         return VectorDijktra;
     }
 
