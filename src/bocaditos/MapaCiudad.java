@@ -341,6 +341,12 @@ public class MapaCiudad {
                 break;
             }
         }
+        Nodo inters = listaIntersecciones.get(indiceInters);
+        if (inters instanceof CasaParticular) {
+            listaCasas.remove((CasaParticular)inters);
+        }else if(listaIntersecciones.get(indiceInters) instanceof PuestoComidaRapida){
+             listaPuestos.remove((PuestoComidaRapida)inters);
+        }
         listaIntersecciones.remove(indiceInters);
         // Elimina Columna con el vertice a eliminar
         for (int i = 0; i < matrizVias.length - 1; i++) {
