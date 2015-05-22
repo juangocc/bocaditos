@@ -214,11 +214,13 @@ public class MapaCiudad {
         System.out.println("verMatriz : \n" + verMatriz + "\n");
         System.out.println("floyWarshall : \n" + floyWarshall + "\n");
         System.out.println("floyWarshall Procedencia: \n" + floyWarshallProcedencia + "\n");
-        System.out.println("Produndidad : \n" + profundidad + "\n");
-        System.out.println("Anchura : \n" + anchura + "\n");
-        System.out.println("Kruskal : \n" + kruskal + "\n");
-        System.out.println("Prim : \n" + prim + "\n");
-        System.out.println("Fulkerson : \n" + fulkerson + "\n");
+        /*
+         System.out.println("Produndidad : \n" + profundidad + "\n");
+         System.out.println("Anchura : \n" + anchura + "\n");
+         System.out.println("Kruskal : \n" + kruskal + "\n");
+         System.out.println("Prim : \n" + prim + "\n");
+         System.out.println("Fulkerson : \n" + fulkerson + "\n");
+         */
         //-----------------------
         /*
          System.out.println("Ruta Optima : " + rutaStr);

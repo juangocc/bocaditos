@@ -193,7 +193,8 @@ public class Grafo {
         setVectorDijktra(new int[Vertices]);
         setVectorVert(new int[Vertices]);
         for (int i = 0; i < Vertices; i++) {
-            VectorVert[i] = -1;
+            getVectorVert()[i] = -1;
+            getVectorDijkstra()[i] = 0;
         }
         boolean[] VectorMarcados = new boolean[Vertices];
 

@@ -7,6 +7,7 @@ package bocaditos;
 
 import java.awt.geom.Rectangle2D;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,6 +40,8 @@ public class Camion extends Objeto {
             intSiguiente = ruta.size() - 2;
             // validar que la ruta tenga mas de una interseccion, o si no indica que esta en el final del recorrido
             setEstado("Ocupado");
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay ruta para llegar al destino.");
         }
     }
 
@@ -86,8 +89,13 @@ public class Camion extends Objeto {
                     // se entrega y se invierte la ruta para devolverse
                     setEstado("Entrega");
                     this.ruta = rutaIdaRegreso.get(1);
-                    intActual = ruta.size() - 1;
-                    intSiguiente = ruta.size() - 2;
+                    if (ruta.size() < 2) {
+                        JOptionPane.showMessageDialog(null, "No hay ruta para llegar al destino.");
+                        setEstado("Estancado");
+                    } else {
+                        intActual = ruta.size() - 1;
+                        intSiguiente = ruta.size() - 2;
+                    }
                 }
             } else if (getEstado().equals("Regresando")) {
                 intSiguiente = intSiguiente - 1;
