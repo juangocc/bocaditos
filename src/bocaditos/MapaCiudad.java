@@ -205,7 +205,6 @@ public class MapaCiudad {
         int[][] floyProcedencia = grafo.FloyWarshall().get(1);
         String floyWarshall = grafo.verMatriz(floyMatriz);
         String floyWarshallProcedencia = grafo.verMatriz(floyProcedencia);
-        String dijkstra = grafo.Dijkstra(indiceIntersecc);
         String profundidad = grafo.recorrido(grafo.Profundidad());
         String anchura = grafo.recorrido(grafo.Anchura());
         String kruskal = grafo.verMatriz(grafo.KKruscal());
@@ -215,7 +214,6 @@ public class MapaCiudad {
         System.out.println("verMatriz : \n" + verMatriz + "\n");
         System.out.println("floyWarshall : \n" + floyWarshall + "\n");
         System.out.println("floyWarshall Procedencia: \n" + floyWarshallProcedencia + "\n");
-        System.out.println("Dijkstra : \n" + dijkstra + "\n");
         System.out.println("Produndidad : \n" + profundidad + "\n");
         System.out.println("Anchura : \n" + anchura + "\n");
         System.out.println("Kruskal : \n" + kruskal + "\n");
@@ -223,29 +221,6 @@ public class MapaCiudad {
         System.out.println("Fulkerson : \n" + fulkerson + "\n");
         //-----------------------
         /*
-         int[] VectorDijkstra = grafo.getVectorDijkstra();
-         int[] VectorVert = grafo.getVectorVert();
-         int menorDistanciaAPuesto = Integer.MAX_VALUE;
-         int indicePuesto = -1;
-         for (int i = 0; i < VectorDijkstra.length; i++) {
-         if (VectorDijkstra[indiceIntersecc] != Integer.MAX_VALUE) {
-         if (listaIntersecciones.get(i) instanceof PuestoComidaRapida) {
-         if (menorDistanciaAPuesto > VectorDijkstra[i]) {
-         menorDistanciaAPuesto = VectorDijkstra[i];
-         indicePuesto = i;
-         }
-         }
-         }
-         }
-         if (indicePuesto != -1) {
-         int procedencia = VectorVert[indicePuesto];
-         rutaOptima.add(listaIntersecciones.get(indicePuesto));
-         String rutaStr = indicePuesto + "";
-         while (procedencia != -1) {
-         rutaOptima.add(listaIntersecciones.get(procedencia));
-         rutaStr += "," + procedencia;
-         procedencia = VectorVert[procedencia];
-         }
          System.out.println("Ruta Optima : " + rutaStr);
          //for (String intStr : rutaVec) {
          //  int indiceInters = Integer.parseInt(intStr);
@@ -264,20 +239,34 @@ public class MapaCiudad {
             }
         }
         if (indicePuesto != -1) {
-            int procedencia = floyProcedencia[indicePuesto][indiceIntersecc];
-            rutaOptima.add(listaIntersecciones.get(indicePuesto));
-            String rutaStr = indicePuesto + "";
+
+            String dijkstra = grafo.Dijkstra(indicePuesto);
+            System.out.println("Dijkstra : \n" + dijkstra + "\n");
+            int[] VectorVert = grafo.getVectorVert();
+            int procedencia = VectorVert[indiceIntersecc];
+            rutaOptima.add(listaIntersecciones.get(indiceIntersecc));
+            String rutaStr = indiceIntersecc + "";
             while (procedencia != -1) {
                 rutaOptima.add(listaIntersecciones.get(procedencia));
                 rutaStr += "," + procedencia;
-                if (procedencia == indiceIntersecc) {
-                    break;
-                }
-                procedencia = floyProcedencia[procedencia][indiceIntersecc];
+                procedencia = VectorVert[procedencia];
             }
+                //-----------------------
+/*
+             int procedencia = floyProcedencia[indicePuesto][indiceIntersecc];
+             rutaOptima.add(listaIntersecciones.get(indicePuesto));
+             String rutaStr = indicePuesto + "";
+             while (procedencia != -1) {
+             rutaOptima.add(listaIntersecciones.get(procedencia));
+             rutaStr += "," + procedencia;
+             if (procedencia == indiceIntersecc) {
+             break;
+             }
+             procedencia = floyProcedencia[procedencia][indiceIntersecc];
+             }
+             */
             System.out.println("Ruta Optima : " + rutaStr);
         }
-
         //--------------------------
         return rutaOptima;
     }
