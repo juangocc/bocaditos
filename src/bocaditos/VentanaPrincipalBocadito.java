@@ -586,7 +586,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                     }
                     String velStr = JOptionPane.showInputDialog(this, "Velocidad : ");
                     String capStr = JOptionPane.showInputDialog(this, "Capacidad : ");
-                    Camion camion = new Camion(nombre, puesto.getPosX(), puesto.getPosY() + 15, 15, 15, Integer.parseInt(velStr), Integer.parseInt(capStr));
+                    Camion camion = new Camion(nombre, puesto.getPosX(), puesto.getPosY() + 15, 20, 20, Integer.parseInt(velStr), Integer.parseInt(capStr));
                     puesto.agregarCamion(camion);
                     jCBCamiones.addItem(camion.getNombre());
                     break;
