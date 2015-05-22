@@ -93,15 +93,15 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
         jCheckBox1 = new javax.swing.JCheckBox();
         jBAgregarCamion = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jCBProdAbasto = new javax.swing.JComboBox();
         jLabel12 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        jCBProdPed = new javax.swing.JComboBox();
+        jBAgregarProdPedido = new javax.swing.JButton();
+        jTFCantProdPed = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        jTFCantProdAbasto = new javax.swing.JTextField();
+        jBAgregarProdAbasto = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -251,11 +251,16 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
 
         jLabel12.setText("Lista Productos Pedido");
 
-        jButton1.setText("Agregar Producto");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jBAgregarProdPedido.setText("Agregar Producto");
+        jBAgregarProdPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jBAgregarProdPedidoActionPerformed(evt);
+            }
+        });
+
+        jTFCantProdPed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFCantProdPedActionPerformed(evt);
             }
         });
 
@@ -263,7 +268,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
 
         jLabel14.setText("Cantidad");
 
-        jButton2.setText("Agregar Producto");
+        jBAgregarProdAbasto.setText("Agregar Producto");
 
         jMenu1.setText("File");
 
@@ -318,13 +323,13 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                                 .addComponent(jCBCasas, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jTFUser, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jBHacerPedido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBAgregarProdPedido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jCBProdPed, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel13)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField1)))
+                                    .addComponent(jTFCantProdPed)))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel10)
@@ -341,8 +346,8 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jLabel14)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField2))
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jTFCantProdAbasto))
+                                    .addComponent(jCBProdAbasto, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jBPrim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -354,7 +359,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                                             .addComponent(jBAgregarCamion, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel11))
                                         .addGap(0, 3, Short.MAX_VALUE))
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jBAgregarProdAbasto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -407,13 +412,13 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCBProdPed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTFCantProdPed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel13))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1)
+                                .addComponent(jBAgregarProdPedido)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jBHacerPedido)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -432,13 +437,13 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCBProdAbasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel14)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTFCantProdAbasto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2)
+                                .addComponent(jBAgregarProdAbasto)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -663,7 +668,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                     break;
                 }
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "No hay ningún Puesto Seleccionado");
         }
     }//GEN-LAST:event_jBAgregarCamionActionPerformed
@@ -686,9 +691,36 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jCBPuestoItemStateChanged
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jTFCantProdPedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCantProdPedActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jTFCantProdPedActionPerformed
+
+    private void jBAgregarProdPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarProdPedidoActionPerformed
+        Object objCasa = jCBCasas.getSelectedItem();
+        if (objCasa != null) {
+            String nombreCasa = objCasa.toString();
+            LinkedList<CasaParticular> listaCasas = mapaCiudad.listaCasas;
+            for (CasaParticular casa : listaCasas) {
+                if (casa.getNombre().equals(nombreCasa)) {
+                    Usuario user = casa.getUser();
+                    if (user != null) {
+                        int confirmación = 0;
+                        while (confirmación == 0) {
+                            String nombreProd = JOptionPane.showInputDialog("Nombre Producto :");
+                            //String precioProd = JOptionPane.showInputDialog("Quiere agregar otro producto ?");
+                            String cantidadProd = JOptionPane.showInputDialog("Cantidad :");
+                            user.agregarProductoAlPedido(new Producto(nombreProd, 10, Integer.parseInt(cantidadProd)));
+                            jCBProdPed.addItem(nombreProd);
+                            confirmación = JOptionPane.showConfirmDialog(null, "Quiere agregar otro producto ?");                       
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Registre Usuario");
+                    }
+                    break;
+                }
+            }
+        }
+    }//GEN-LAST:event_jBAgregarProdPedidoActionPerformed
     public void llenarComboBoxIntersecciones() {
         LinkedList<Nodo> listaIntersecciones = mapaCiudad.listaIntersecciones;
         jCBInterseccionInicial.removeAllItems();
@@ -770,26 +802,26 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private bocaditos.AreaDeDibujo areaDeDibujo1;
     private javax.swing.JButton jBAgregarCamion;
+    private javax.swing.JButton jBAgregarProdAbasto;
+    private javax.swing.JButton jBAgregarProdPedido;
     private javax.swing.JButton jBCrearVia;
     private javax.swing.JButton jBElimVia;
     private javax.swing.JButton jBGirarSentido;
     private javax.swing.JButton jBHacerPedido;
     private javax.swing.JButton jBKruskal;
     private javax.swing.JButton jBPrim;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jCBCamiones;
     private javax.swing.JComboBox jCBCasas;
     private javax.swing.JComboBox jCBCrearAlClick;
     private javax.swing.JComboBox jCBInterseccionFinal;
     private javax.swing.JComboBox jCBInterseccionInicial;
+    private javax.swing.JComboBox jCBProdAbasto;
+    private javax.swing.JComboBox jCBProdPed;
     private javax.swing.JComboBox jCBPuesto;
     private javax.swing.JComboBox jCBSentido;
     private javax.swing.JComboBox jCBVias;
     private javax.swing.JCheckBox jCHBAutoAsignacion;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -813,9 +845,9 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JToggleButton jTBElimInters;
+    private javax.swing.JTextField jTFCantProdAbasto;
+    private javax.swing.JTextField jTFCantProdPed;
     private javax.swing.JTextField jTFPeso;
     private javax.swing.JTextField jTFUser;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

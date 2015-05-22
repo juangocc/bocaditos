@@ -10,11 +10,12 @@ package bocaditos;
  * @author juangocc
  */
 public class Producto {
-    private String nombre;
-    private String precio;
-    private String tamanio;
 
-    public Producto(String nombre, String precio, String tamanio) {
+    private String nombre;
+    private int precio;
+    private int tamanio;
+
+    public Producto(String nombre, int precio, int tamanio) {
         this.nombre = nombre;
         this.precio = precio;
         this.tamanio = tamanio;
@@ -35,31 +36,31 @@ public class Producto {
     }
 
     /**
-     * @return the precio
-     */
-    public String getPrecio() {
-        return precio;
-    }
-
-    /**
-     * @param precio the precio to set
-     */
-    public void setPrecio(String precio) {
-        this.precio = precio;
-    }
-
-    /**
      * @return the tamanio
      */
-    public String getTamanio() {
+    public int getTamanio() {
         return tamanio;
     }
 
     /**
      * @param tamanio the tamanio to set
      */
-    public void setTamanio(String tamanio) {
+    public void setTamanio(int tamanio) {
         this.tamanio = tamanio;
     }
-    
+
+    /**
+     * @return the precio
+     */
+    public int getPrecio() {
+        return precio;
+    }
+
+    /**
+     * @param precio the precio to set
+     */
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+
 }
