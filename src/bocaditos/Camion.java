@@ -33,8 +33,8 @@ public class Camion extends Objeto {
     public void asignarRuta(LinkedList<Nodo> ruta) {
         this.ruta = ruta;
         if (ruta.size() > 1) {
-            intActual = ruta.size() - 1;
-            intSiguiente = ruta.size() - 2;
+            intActual = 0;
+            intSiguiente = 1;
             // validar que la ruta tenga mas de una interseccion, o si no indica que esta en el final del recorrido
             setEstado("Ocupado");
         }
@@ -78,18 +78,18 @@ public class Camion extends Objeto {
         // si ya a llegado a la siguiente intersección, remplazar la actual por la siguiente , y la siguiente por la siguiente de ella en la ruta
         if (ruta.get(intSiguiente).getArea().intersects(x, y, getAncho(), getAlto())) {
             intActual = intSiguiente;
-            if (getEstado().equals("Ocupado")) {
+            if (getEstado().equals("Regresando")) {
                 intSiguiente = intSiguiente - 1;
                 if (intSiguiente < 0) {
                     // se entrega y se invierte la ruta para devolverse
-                    setEstado("Entrega");
-                    intSiguiente = 1;
-                }
-            } else if (getEstado().equals("Regresando")) {
-                intSiguiente = intSiguiente + 1;
-                if (intSiguiente > ruta.size() - 1) {
                     setEstado("Disponible");
                     intSiguiente = 1;
+                }
+            } else if (getEstado().equals("Ocupado")) {
+                intSiguiente = intSiguiente + 1;
+                if (intSiguiente > ruta.size() - 1) {
+                    setEstado("Entrega");
+                    intSiguiente = ruta.size()-2;
                 }
             }
         }

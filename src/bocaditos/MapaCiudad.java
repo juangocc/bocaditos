@@ -7,6 +7,7 @@ package bocaditos;
 
 import grafos.Grafo;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -158,14 +159,19 @@ public class MapaCiudad {
 
     public boolean solicitudPedido(String nombreCasa) {
         LinkedList<Nodo> ruta = getRutaOptima(nombreCasa);
-        Nodo intLast = listaIntersecciones.getLast();
-        Camion camion = null;
-        for (PuestoComidaRapida puesto : listaPuestos) {
-            camion = puesto.getCamionDisponible();
-            if (camion != null) {
-                camion.asignarRuta(ruta);
-                return true;
+        if (ruta != null) {
+
+            Nodo intLast = listaIntersecciones.getLast();
+            Camion camion = null;
+            for (PuestoComidaRapida puesto : listaPuestos) {
+                camion = puesto.getCamionDisponible();
+                if (camion != null) {
+                    camion.asignarRuta(ruta);
+                    return true;
+                }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró Ruta óptima");
         }
         return false;
     }
@@ -200,7 +206,7 @@ public class MapaCiudad {
         String anchura = grafo.recorrido(grafo.Anchura());
         String kruskal = grafo.verMatriz(grafo.KKruscal());
         String prim = grafo.verMatriz(grafo.Prim(indiceIntersecc).getGrafo());
-        String fulkerson = grafo.fordFulkerson(indiceIntersecc, listaIntersecciones.size()-1) + "";
+        String fulkerson = grafo.fordFulkerson(indiceIntersecc, listaIntersecciones.size() - 1) + "";
 
         System.out.println("verMatriz : \n" + verMatriz + "\n");
         System.out.println("floyWarshall : \n" + floyMatriz + "\n");
@@ -225,24 +231,22 @@ public class MapaCiudad {
                 }
             }
         }
-        int procedencia = VectorVert[indicePuesto];
-        System.out.println("---- "+indicePuesto);
-        System.out.println("---- "+procedencia);
-        rutaOptima.add(listaIntersecciones.get(indicePuesto));
-        String rutaStr = indicePuesto + ",";
-        while (procedencia != -1) {
-            System.out.println("---- "+procedencia);
-            rutaOptima.add(listaIntersecciones.get(procedencia));
-            rutaStr += procedencia + ",";
-            procedencia = VectorVert[procedencia];
+        if (indicePuesto != -1) {
+            int procedencia = VectorVert[indicePuesto];
+            rutaOptima.add(listaIntersecciones.get(indicePuesto));
+            String rutaStr = indicePuesto + "";
+            while (procedencia != -1) {
+                rutaOptima.add(listaIntersecciones.get(procedencia));
+                rutaStr += "," + procedencia;
+                procedencia = VectorVert[procedencia];
+            }
+            System.out.println("Ruta Optima : " + rutaStr);
+            //for (String intStr : rutaVec) {
+            //  int indiceInters = Integer.parseInt(intStr);
+            //rutaOptima.add(listaIntersecciones.get(indiceInters));
+            //}
+            //--   -----------
         }
-        System.out.println("Ruta Optima : " + rutaStr);
-        //for (String intStr : rutaVec) {
-        //  int indiceInters = Integer.parseInt(intStr);
-        //rutaOptima.add(listaIntersecciones.get(indiceInters));
-        //}
-        //-------------
-
         return rutaOptima;
     }
 
