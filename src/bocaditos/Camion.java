@@ -14,6 +14,7 @@ import java.util.LinkedList;
  */
 public class Camion extends Objeto {
 
+    LinkedList<LinkedList<Nodo>> rutaIdaRegreso;
     LinkedList<Nodo> ruta;
     int intActual;
     int intSiguiente;
@@ -30,8 +31,9 @@ public class Camion extends Objeto {
         this.posYInicial = posY;
     }
 
-    public void asignarRuta(LinkedList<Nodo> ruta) {
-        this.ruta = ruta;
+    public void asignarRuta(LinkedList<LinkedList<Nodo>> rutaIdaRegreso) {
+        this.rutaIdaRegreso = rutaIdaRegreso;
+        this.ruta = rutaIdaRegreso.get(0);
         if (ruta.size() > 1) {
             intActual = ruta.size() - 1;
             intSiguiente = ruta.size() - 2;
@@ -83,13 +85,14 @@ public class Camion extends Objeto {
                 if (intSiguiente < 0) {
                     // se entrega y se invierte la ruta para devolverse
                     setEstado("Entrega");
-                    intSiguiente = 1;
+                    this.ruta = rutaIdaRegreso.get(1);
+                    intActual = ruta.size() - 1;
+                    intSiguiente = ruta.size() - 2;
                 }
             } else if (getEstado().equals("Regresando")) {
-                intSiguiente = intSiguiente + 1;
-                if (intSiguiente > ruta.size() - 1) {
+                intSiguiente = intSiguiente - 1;
+                if (intSiguiente < 0) {
                     setEstado("Disponible");
-                    intSiguiente = 1;
                 }
             }
         }

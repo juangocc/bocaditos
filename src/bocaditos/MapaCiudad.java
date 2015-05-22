@@ -158,15 +158,15 @@ public class MapaCiudad {
     }
 
     public boolean solicitudPedido(String nombreCasa) {
-        LinkedList<Nodo> ruta = getRutaOptima(nombreCasa);
-        if (ruta != null) {
+        LinkedList<LinkedList<Nodo>> rutaIdaRegreso = getRutaOptima(nombreCasa);
+        if (rutaIdaRegreso != null) {
 
             Nodo intLast = listaIntersecciones.getLast();
             Camion camion = null;
             for (PuestoComidaRapida puesto : listaPuestos) {
                 camion = puesto.getCamionDisponible();
                 if (camion != null) {
-                    camion.asignarRuta(ruta);
+                    camion.asignarRuta(rutaIdaRegreso);
                     return true;
                 }
             }
@@ -176,7 +176,7 @@ public class MapaCiudad {
         return false;
     }
 
-    public LinkedList<Nodo> getRutaOptima(String nombreCasa) {
+    public LinkedList<LinkedList<Nodo>> getRutaOptima(String nombreCasa) {
         int indiceIntersecc = -1;
         for (int i = 0; i < listaIntersecciones.size(); i++) {
             if (listaIntersecciones.get(i).getNombre().equals(nombreCasa)) {
@@ -184,7 +184,7 @@ public class MapaCiudad {
                 break;
             }
         }
-        LinkedList<Nodo> rutaOptima = new LinkedList<>();
+        LinkedList<LinkedList<Nodo>> rutaOptimaIdaRegreso = new LinkedList<>();
         //-----------------
         int[][] grafoPesos = new int[listaIntersecciones.size()][listaIntersecciones.size()];
         int numAristas = 0;
@@ -239,36 +239,40 @@ public class MapaCiudad {
             }
         }
         if (indicePuesto != -1) {
-
+            //------------------------ Ruta De Entrega
+            LinkedList<Nodo> rutaOptimaIda = new LinkedList<>();
             String dijkstra = grafo.Dijkstra(indicePuesto);
-            System.out.println("Dijkstra : \n" + dijkstra + "\n");
+            System.out.println("Dijkstra Ida: \n" + dijkstra + "\n");
             int[] VectorVert = grafo.getVectorVert();
             int procedencia = VectorVert[indiceIntersecc];
-            rutaOptima.add(listaIntersecciones.get(indiceIntersecc));
+            rutaOptimaIda.add(listaIntersecciones.get(indiceIntersecc));
             String rutaStr = indiceIntersecc + "";
             while (procedencia != -1) {
-                rutaOptima.add(listaIntersecciones.get(procedencia));
+                rutaOptimaIda.add(listaIntersecciones.get(procedencia));
                 rutaStr += "," + procedencia;
                 procedencia = VectorVert[procedencia];
             }
-                //-----------------------
-/*
-             int procedencia = floyProcedencia[indicePuesto][indiceIntersecc];
-             rutaOptima.add(listaIntersecciones.get(indicePuesto));
-             String rutaStr = indicePuesto + "";
-             while (procedencia != -1) {
-             rutaOptima.add(listaIntersecciones.get(procedencia));
-             rutaStr += "," + procedencia;
-             if (procedencia == indiceIntersecc) {
-             break;
-             }
-             procedencia = floyProcedencia[procedencia][indiceIntersecc];
-             }
-             */
-            System.out.println("Ruta Optima : " + rutaStr);
+            System.out.println("Ruta Optima Ida: " + rutaStr);
+            //-----------------------Ruta de Regreso
+            LinkedList<Nodo> rutaOptimaRegreso = new LinkedList<>();
+            dijkstra = grafo.Dijkstra(indiceIntersecc);
+            System.out.println("Dijkstra Regreso: \n" + dijkstra + "\n");
+            VectorVert = grafo.getVectorVert();
+            procedencia = VectorVert[indicePuesto];
+            rutaOptimaRegreso.add(listaIntersecciones.get(indicePuesto));
+            rutaStr = indicePuesto + "";
+            while (procedencia != -1) {
+                rutaOptimaRegreso.add(listaIntersecciones.get(procedencia));
+                rutaStr += "," + procedencia;
+                procedencia = VectorVert[procedencia];
+            }
+            System.out.println("Ruta Optima Regreso: " + rutaStr);
+            //-----------------------
+            rutaOptimaIdaRegreso.add(rutaOptimaIda);
+            rutaOptimaIdaRegreso.add(rutaOptimaRegreso);
         }
         //--------------------------
-        return rutaOptima;
+        return rutaOptimaIdaRegreso;
     }
 
     public void desplazarCamiones() {
