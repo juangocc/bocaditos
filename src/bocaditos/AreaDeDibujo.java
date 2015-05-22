@@ -5,9 +5,13 @@
  */
 package bocaditos;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.io.File;
 import java.util.LinkedList;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -16,12 +20,23 @@ import java.util.LinkedList;
 public class AreaDeDibujo extends javax.swing.JPanel {
 
     private MapaCiudad mapaCiudad;
+    private boolean pintarRutaDomicilio;
+    Image[] listaimagenes;
 
     /**
      * Creates new form AreaDeDibujo
      */
     public AreaDeDibujo() {
         initComponents();
+        listaimagenes = new Image[4];
+        try {
+            listaimagenes[0] = ImageIO.read(new File("src/images/house.png"));
+            listaimagenes[1] = ImageIO.read(new File("src/images/carRight.png"));
+            listaimagenes[2] = ImageIO.read(new File("src/images/carLeft.png"));
+            listaimagenes[3] = ImageIO.read(new File("src/images/grocery.png"));
+        } catch (Exception e) {
+            System.out.println("Error Imagen : " + e);
+        }
     }
 
     @Override
@@ -34,17 +49,28 @@ public class AreaDeDibujo extends javax.swing.JPanel {
                 Via[][] matrizVias = getMapaCiudad().matrizVias;
                 for (int i = 0; i < matrizVias.length; i++) {
                     Nodo interseccionInicial = listaIntersecciones.get(i);
-                    g2.drawString(interseccionInicial.getNombre(), interseccionInicial.getPosX() - 5, interseccionInicial.getPosY() - 5);
                     if (interseccionInicial instanceof CasaParticular) {
-                        //Pintar Casa
+                        g2.drawImage(listaimagenes[0], interseccionInicial.getPosX(), interseccionInicial.getPosY(), interseccionInicial.getAncho(), interseccionInicial.getAlto(), this);
                     } else if (interseccionInicial instanceof PuestoComidaRapida) {
+                        g2.drawImage(listaimagenes[3], interseccionInicial.getPosX(), interseccionInicial.getPosY(), interseccionInicial.getAncho(), interseccionInicial.getAlto(), this);
                         LinkedList<Camion> listaCamiones = ((PuestoComidaRapida) interseccionInicial).getListaCamiones();
                         for (Camion camion : listaCamiones) {
-                            g2.drawString(camion.getNombre(), camion.getPosX() +15, camion.getPosY() -5);
-                            g2.draw(camion.getArea());
+                            if (camion.direccion.equals("Derecha")) {
+                                g2.drawImage(listaimagenes[1], camion.getPosX(), camion.getPosY(), camion.getAncho(), camion.getAlto(), this);
+                            } else if (camion.direccion.equals("Izquierda")) {
+                                g2.drawImage(listaimagenes[2], camion.getPosX(), camion.getPosY(), camion.getAncho(), camion.getAlto(), this);
+                            }
+                            //g2.draw(camion.getArea());
+                            g2.drawString(camion.getNombre(), camion.getPosX() + 15, camion.getPosY() - 5);
+
+                            if (pintarRutaDomicilio) {
+                                pintarRuta(camion.rutaIdaRegreso, g2);
+                            }
                         }
+                    } else {
+                        g2.draw(interseccionInicial.getArea());
                     }
-                    g2.draw(interseccionInicial.getArea());
+                    g2.drawString(interseccionInicial.getNombre(), interseccionInicial.getPosX() - 5, interseccionInicial.getPosY() - 5);
                     for (int j = 0; j < matrizVias[i].length; j++) {
                         Via via = matrizVias[i][j];
                         if (via != null) {
@@ -108,6 +134,34 @@ public class AreaDeDibujo extends javax.swing.JPanel {
         return (result < 0) ? (360d + result) : result;
     }
 
+    private void pintarRuta(LinkedList<LinkedList<Nodo>> rutaIdaRegreso, Graphics2D g2) {
+        if (rutaIdaRegreso != null) {
+            LinkedList<Nodo> rutaIda = rutaIdaRegreso.get(0);
+            LinkedList<Nodo> rutaRegreso = rutaIdaRegreso.get(1);
+            if (rutaIda != null && rutaIda.size() > 1) {
+                g2.setColor(Color.green);
+                for (int i = 0; i < rutaIda.size() - 1; i++) {
+                    int posX1 = rutaIda.get(i).getPosX();
+                    int posY1 = rutaIda.get(i).getPosY();
+                    int posX2 = rutaIda.get(i + 1).getPosX();
+                    int posY2 = rutaIda.get(i + 1).getPosY();
+                    g2.drawLine(posX1, posY1, posX2, posY2);
+                }
+            }
+            if (rutaRegreso != null && rutaRegreso.size() > 1) {
+                g2.setColor(Color.blue);
+                for (int i = 0; i < rutaRegreso.size() - 1; i++) {
+                    int posX1 = rutaRegreso.get(i).getPosX();
+                    int posY1 = rutaRegreso.get(i).getPosY();
+                    int posX2 = rutaRegreso.get(i + 1).getPosX();
+                    int posY2 = rutaRegreso.get(i + 1).getPosY();
+                    g2.drawLine(posX1, posY1, posX2, posY2);
+                }
+            }
+            g2.setColor(Color.black);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -144,5 +198,19 @@ public class AreaDeDibujo extends javax.swing.JPanel {
      */
     public void setMapaCiudad(MapaCiudad mapaCiudad) {
         this.mapaCiudad = mapaCiudad;
+    }
+
+    /**
+     * @return the pintarRutaDomicilio
+     */
+    public boolean isPintarRutaDomicilio() {
+        return pintarRutaDomicilio;
+    }
+
+    /**
+     * @param pintarRutaDomicilio the pintarRutaDomicilio to set
+     */
+    public void setPintarRutaDomicilio(boolean pintarRutaDomicilio) {
+        this.pintarRutaDomicilio = pintarRutaDomicilio;
     }
 }

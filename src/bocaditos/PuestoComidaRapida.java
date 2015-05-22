@@ -13,13 +13,17 @@ import java.util.LinkedList;
  */
 public class PuestoComidaRapida extends Nodo {
 
+    String[][] abastoProductos;
     private LinkedList<Camion> listaCamiones;
 
     public PuestoComidaRapida(String nombre, int posX, int posY, int ancho, int alto) {
         super(nombre, posX, posY, ancho, alto);
         listaCamiones = new LinkedList<>();
-        Camion camion = new Camion("CM1", posX, posY, 5, 5);
-        camion.setEstado("Disponible");
+        Camion camion = new Camion("CM"+(getListaCamiones().size()+1), posX, posY+15, 15, 15);
+        listaCamiones.add(camion);
+    }
+
+    public void agregarCamion(Camion camion) {
         listaCamiones.add(camion);
     }
 

@@ -19,7 +19,7 @@ public class MapaCiudad {
     LinkedList<CasaParticular> listaCasas;
     LinkedList<PuestoComidaRapida> listaPuestos;
     Via[][] matrizVias;
-    Grafo grafo;
+    Grafo grafo;    
 
     public MapaCiudad() {
         listaIntersecciones = new LinkedList<>();
@@ -61,14 +61,14 @@ public class MapaCiudad {
     }
 
     public void crearCasa(int posX, int posY) {
-        CasaParticular cp = new CasaParticular("C" + listaCasas.size(), posX - 3, posY - 3, 15, 15);
+        CasaParticular cp = new CasaParticular("C" + listaCasas.size(), posX - 3, posY - 3, 30, 30);
         listaCasas.add(cp);
         listaIntersecciones.add(cp);
         redimensionarMatrizVias();
     }
 
     public void crearPuesto(int posX, int posY) {
-        PuestoComidaRapida pc = new PuestoComidaRapida("P" + listaPuestos.size(), posX - 3, posY - 3, 10, 10);
+        PuestoComidaRapida pc = new PuestoComidaRapida("P" + listaPuestos.size(), posX - 3, posY - 3, 30, 30);
         listaPuestos.add(pc);
         listaIntersecciones.add(pc);
         redimensionarMatrizVias();

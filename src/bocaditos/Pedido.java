@@ -10,9 +10,7 @@ package bocaditos;
  * @author juangocc
  */
 public class Pedido {
-    String idUsuario;
-    String productosPrecio;
-    String fecha;
-    String destino;
+    String[][] datosProductos;
+    String nombreCasaCliente;
     
 }

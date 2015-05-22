@@ -77,9 +77,9 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jCBSentido = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
-        jCPuesto = new javax.swing.JComboBox();
+        jCBPuesto = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        jCBCamiones = new javax.swing.JComboBox();
         jCHBAutoAsignacion = new javax.swing.JCheckBox();
         jLabel9 = new javax.swing.JLabel();
         jTFUser = new javax.swing.JTextField();
@@ -90,6 +90,8 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
         jTBElimInters = new javax.swing.JToggleButton();
         jBPrim = new javax.swing.JButton();
         jBKruskal = new javax.swing.JButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jBAgregarCamion = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -112,7 +114,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
         areaDeDibujo1.setLayout(areaDeDibujo1Layout);
         areaDeDibujo1Layout.setHorizontalGroup(
             areaDeDibujo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 784, Short.MAX_VALUE)
+            .addGap(0, 743, Short.MAX_VALUE)
         );
         areaDeDibujo1Layout.setVerticalGroup(
             areaDeDibujo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,6 +170,12 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
 
         jLabel7.setText("Puestos de Comida Rap");
 
+        jCBPuesto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCBPuestoItemStateChanged(evt);
+            }
+        });
+
         jLabel8.setText("Camiones");
 
         jCHBAutoAsignacion.setText("Nombres Asignados Automaticamente");
@@ -215,6 +223,20 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
 
         jBKruskal.setText("Kruskal");
 
+        jCheckBox1.setText("Pintar Ruta Domicilio");
+        jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBox1ItemStateChanged(evt);
+            }
+        });
+
+        jBAgregarCamion.setText("Agregar Camion");
+        jBAgregarCamion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAgregarCamionActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
 
         jMenuItem5.setText("Abrir Mapa");
@@ -256,29 +278,6 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4)
-                            .addComponent(jCBCasas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBHacerPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-                            .addComponent(jLabel9)
-                            .addComponent(jTFUser))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jCPuesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jBPrim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jBKruskal, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addComponent(jCHBAutoAsignacion)
                     .addComponent(jLabel10)
                     .addGroup(layout.createSequentialGroup()
@@ -291,18 +290,43 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                                 .addComponent(jCBVias, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jBElimVia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                                .addComponent(jTFPeso, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jCBInterseccionFinal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jCBInterseccionInicial, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2)
-                            .addComponent(jBCrearVia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTBElimInters, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jTFPeso, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jCheckBox1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel4)
+                                .addComponent(jCBCasas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBHacerPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                                .addComponent(jLabel9)
+                                .addComponent(jTFUser)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jCBPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel8)
+                                            .addComponent(jCBCamiones, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jCBInterseccionFinal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jCBInterseccionInicial, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jBCrearVia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jTBElimInters, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jBPrim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jBKruskal, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBAgregarCamion, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                         .addComponent(areaDeDibujo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(81, 81, 81)
@@ -323,7 +347,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jCBCasas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jCBPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
@@ -331,21 +355,23 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jBKruskal))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(4, 4, 4)
-                                        .addComponent(jBPrim, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jCBCamiones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBAgregarCamion))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTFUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jBHacerPedido)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jBKruskal))
+                                    .addComponent(jBPrim, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCBInterseccionInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -357,6 +383,8 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                                 .addComponent(jBCrearVia)
                                 .addGap(58, 58, 58))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jCheckBox1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jCBVias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -372,9 +400,8 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jTFPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTBElimInters))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBElimVia)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jCHBAutoAsignacion)
                         .addGap(3, 3, 3))
                     .addGroup(layout.createSequentialGroup()
@@ -406,6 +433,7 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
                 llenarComboBoxCasas();
             } else if (accion.equals("Puesto")) {
                 mapaCiudad.crearPuesto(evt.getX(), evt.getY());
+                llenarComboBoxPuestos();
             }
             llenarComboBoxIntersecciones();
         }
@@ -532,6 +560,50 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
     private void jBPrimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrimActionPerformed
 
     }//GEN-LAST:event_jBPrimActionPerformed
+
+    private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
+        boolean seleccionado = false;
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            seleccionado = true;
+        } else if (evt.getStateChange() == ItemEvent.DESELECTED) {
+            seleccionado = false;
+        }
+        areaDeDibujo1.setPintarRutaDomicilio(seleccionado);
+    }//GEN-LAST:event_jCheckBox1ItemStateChanged
+
+    private void jBAgregarCamionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarCamionActionPerformed
+       Object objPuesto = jCBPuesto.getSelectedItem();
+        if (objPuesto!=null) {
+            String nombrePuesto= objPuesto.toString();
+            LinkedList<PuestoComidaRapida> listaPuestos = mapaCiudad.listaPuestos;
+            for (PuestoComidaRapida puesto : listaPuestos) {
+                if (puesto.getNombre().equals(nombrePuesto)) {
+                    Camion camion = new Camion("CM"+(puesto.getListaCamiones().size()+1), puesto.getPosX(), puesto.getPosY()+15, 15, 15);
+                    puesto.agregarCamion(camion);
+                    jCBCamiones.addItem(camion.getNombre());
+                    break;
+                }
+            }
+        }
+    }//GEN-LAST:event_jBAgregarCamionActionPerformed
+
+    private void jCBPuestoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBPuestoItemStateChanged
+       Object objPuesto = jCBPuesto.getSelectedItem();
+        if (objPuesto!=null) {
+            String nombrePuesto = objPuesto.toString();
+            LinkedList<PuestoComidaRapida> listaPuestos = mapaCiudad.listaPuestos;
+            jCBCamiones.removeAllItems();
+            for (PuestoComidaRapida puesto : listaPuestos) {
+                if (puesto.getNombre().equals(nombrePuesto)) {
+                    LinkedList<Camion> listaCamiones = puesto.getListaCamiones();
+                    for (Camion camion : listaCamiones) {
+                        jCBCamiones.addItem(camion.getNombre());
+                    }
+                    break;
+                }
+            }
+        }
+    }//GEN-LAST:event_jCBPuestoItemStateChanged
     public void llenarComboBoxIntersecciones() {
         LinkedList<Nodo> listaIntersecciones = mapaCiudad.listaIntersecciones;
         jCBInterseccionInicial.removeAllItems();
@@ -547,6 +619,19 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
         jCBCasas.removeAllItems();
         for (CasaParticular casa : listaCasas) {
             jCBCasas.addItem(casa.getNombre());
+        }
+    }
+
+    public void llenarComboBoxPuestos() {
+        LinkedList<PuestoComidaRapida> listaCasas = mapaCiudad.listaPuestos;
+        jCBPuesto.removeAllItems();
+        jCBCamiones.removeAllItems();
+        for (PuestoComidaRapida puesto : listaCasas) {
+            jCBPuesto.addItem(puesto.getNombre());
+            LinkedList<Camion> listaCamiones = puesto.getListaCamiones();
+            for (Camion camion : listaCamiones) {
+                jCBCamiones.addItem(camion.getNombre());
+            }
         }
     }
 
@@ -599,21 +684,23 @@ public class VentanaPrincipalBocadito extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private bocaditos.AreaDeDibujo areaDeDibujo1;
+    private javax.swing.JButton jBAgregarCamion;
     private javax.swing.JButton jBCrearVia;
     private javax.swing.JButton jBElimVia;
     private javax.swing.JButton jBGirarSentido;
     private javax.swing.JButton jBHacerPedido;
     private javax.swing.JButton jBKruskal;
     private javax.swing.JButton jBPrim;
+    private javax.swing.JComboBox jCBCamiones;
     private javax.swing.JComboBox jCBCasas;
     private javax.swing.JComboBox jCBCrearAlClick;
     private javax.swing.JComboBox jCBInterseccionFinal;
     private javax.swing.JComboBox jCBInterseccionInicial;
+    private javax.swing.JComboBox jCBPuesto;
     private javax.swing.JComboBox jCBSentido;
     private javax.swing.JComboBox jCBVias;
     private javax.swing.JCheckBox jCHBAutoAsignacion;
-    private javax.swing.JComboBox jCPuesto;
-    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

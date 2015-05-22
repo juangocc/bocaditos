@@ -5,7 +5,6 @@
  */
 package bocaditos;
 
-import java.awt.geom.Rectangle2D;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
@@ -24,12 +23,15 @@ public class Camion extends Objeto {
     int posXInicial;
     int posYInicial;
     int capacidad;
+    String direccion;
 
     public Camion(String nombre, int posX, int posY, int ancho, int alto) {
         super(nombre, posX, posY, ancho, alto);
         this.velocidad = 5;
         this.posXInicial = posX;
         this.posYInicial = posY;
+        direccion = "Derecha";
+        setEstado("Disponible");
     }
 
     public void asignarRuta(LinkedList<LinkedList<Nodo>> rutaIdaRegreso) {
@@ -52,7 +54,7 @@ public class Camion extends Objeto {
                 setEstado("Regresando");
             }
             return true;
-        }else if (getEstado().equals("Estancado")) {
+        } else if (getEstado().equals("Estancado")) {
             // necesita nueva ruta para desplazarse
             return false;
         }
@@ -66,8 +68,10 @@ public class Camion extends Objeto {
         if (Math.abs(x1 - x2) > Math.abs(y1 - y2)) {
             if (x2 < x1) {
                 x -= velocidad;
+                direccion = "Izquierda";
             } else {
                 x += velocidad;
+                direccion = "Derecha";
             }
             // Ecuación de la Linea
             y = (((y2 - y1) / (x2 - x1)) * (x - x1)) + y1;
@@ -75,8 +79,10 @@ public class Camion extends Objeto {
         {
             if (y2 < y1) {
                 y -= velocidad;
+                direccion = "Izquierda";
             } else {
                 y += velocidad;
+                direccion = "Derecha";
             }
             // Ecuación de la Linea
             x = (((x2 - x1) / (y2 - y1)) * (y - y1)) + x1;
